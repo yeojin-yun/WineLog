@@ -15,13 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let categoryVC = MyWineListVC()
-        let firstNavVC = UINavigationController(rootViewController: categoryVC)
-        let wishListVC = AddWineCategoryVC()
-        let secondNavVC = UINavigationController(rootViewController: wishListVC)
+        let firstNavVC = UINavigationController(rootViewController: AddWineCategoryVC())
+        let secondNavVC = UINavigationController(rootViewController: MyWineListVC())
         let tabBarController = UITabBarController()
         
-//        firstNavVC.tabBarItem = UITabBarItem(title: "Domino/'s", image: UIImage(named: "domino's"), tag: 0)
+        firstNavVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus"), tag: 0)
+        secondNavVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "list.bullet"), tag: 1)
         tabBarController.viewControllers = [firstNavVC, secondNavVC]
         
         window?.rootViewController = tabBarController

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B635B94F28EDB3DD00622056 /* WineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B635B94E28EDB3DD00622056 /* WineModel.swift */; };
+		B635B95528EE1D7100622056 /* ETInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B635B95428EE1D7100622056 /* ETInt.swift */; };
 		B6C1694428EAC20300BE77F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1694328EAC20300BE77F8 /* AppDelegate.swift */; };
 		B6C1694828EAC20300BE77F8 /* MyWineListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1694728EAC20300BE77F8 /* MyWineListVC.swift */; };
 		B6C1694D28EAC20400BE77F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6C1694C28EAC20400BE77F8 /* Assets.xcassets */; };
@@ -15,9 +17,12 @@
 		B6C1695C28EAC64500BE77F8 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1695B28EAC64500BE77F8 /* Singleton.swift */; };
 		B6C1695E28EAC6C200BE77F8 /* SingletonS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1695D28EAC6C200BE77F8 /* SingletonS.swift */; };
 		B6C1696028EAC6CF00BE77F8 /* SingletonY.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1695F28EAC6CF00BE77F8 /* SingletonY.swift */; };
+		B6DB776128ECA6EE00777CB8 /* AddWineInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DB776028ECA6EE00777CB8 /* AddWineInformationVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B635B94E28EDB3DD00622056 /* WineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineModel.swift; sourceTree = "<group>"; };
+		B635B95428EE1D7100622056 /* ETInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETInt.swift; sourceTree = "<group>"; };
 		B6C1694028EAC20300BE77F8 /* WineLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WineLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6C1694328EAC20300BE77F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6C1694728EAC20300BE77F8 /* MyWineListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWineListVC.swift; sourceTree = "<group>"; };
@@ -28,6 +33,7 @@
 		B6C1695B28EAC64500BE77F8 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		B6C1695D28EAC6C200BE77F8 /* SingletonS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonS.swift; sourceTree = "<group>"; };
 		B6C1695F28EAC6CF00BE77F8 /* SingletonY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonY.swift; sourceTree = "<group>"; };
+		B6DB776028ECA6EE00777CB8 /* AddWineInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineInformationVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +47,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B635B95028EDB3FB00622056 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B635B94E28EDB3DD00622056 /* WineModel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		B635B95128EE05B300622056 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B635B95428EE1D7100622056 /* ETInt.swift */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
 		B6C1693728EAC20300BE77F8 = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +91,9 @@
 				B6C1695F28EAC6CF00BE77F8 /* SingletonY.swift */,
 				B6C1695928EAC58000BE77F8 /* MyWineListVC */,
 				B6C1695A28EAC59700BE77F8 /* AddWineCategoryVC */,
+				B6DB776228ECA6F600777CB8 /* AddWineInformationVC */,
+				B635B95028EDB3FB00622056 /* Model */,
+				B635B95128EE05B300622056 /* Extension */,
 			);
 			path = WineLog;
 			sourceTree = "<group>";
@@ -87,6 +112,14 @@
 				B6C1695728EAC50900BE77F8 /* AddWineCategoryVC.swift */,
 			);
 			name = AddWineCategoryVC;
+			sourceTree = "<group>";
+		};
+		B6DB776228ECA6F600777CB8 /* AddWineInformationVC */ = {
+			isa = PBXGroup;
+			children = (
+				B6DB776028ECA6EE00777CB8 /* AddWineInformationVC.swift */,
+			);
+			name = AddWineInformationVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,7 +196,10 @@
 				B6C1696028EAC6CF00BE77F8 /* SingletonY.swift in Sources */,
 				B6C1695E28EAC6C200BE77F8 /* SingletonS.swift in Sources */,
 				B6C1695C28EAC64500BE77F8 /* Singleton.swift in Sources */,
+				B635B95528EE1D7100622056 /* ETInt.swift in Sources */,
 				B6C1694828EAC20300BE77F8 /* MyWineListVC.swift in Sources */,
+				B6DB776128ECA6EE00777CB8 /* AddWineInformationVC.swift in Sources */,
+				B635B94F28EDB3DD00622056 /* WineModel.swift in Sources */,
 				B6C1694428EAC20300BE77F8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
