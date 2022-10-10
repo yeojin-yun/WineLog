@@ -19,13 +19,3 @@ extension Int{
     }
 }
 
-
-//
-//switch Singleton.shared.myWines[indexPath.item].type{
-//case .red
-//    imageView.image = UIImage(named: "redIcon")
-//case .white
-//case .rose
-//case .none:
-//    
-//}

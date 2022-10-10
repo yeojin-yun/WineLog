@@ -9,20 +9,42 @@
 /* Begin PBXBuildFile section */
 		B635B94F28EDB3DD00622056 /* WineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B635B94E28EDB3DD00622056 /* WineModel.swift */; };
 		B635B95528EE1D7100622056 /* ETInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B635B95428EE1D7100622056 /* ETInt.swift */; };
+		B654561128F0B49F00961619 /* UIColor_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654561028F0B49F00961619 /* UIColor_Extension.swift */; };
+		B654561528F0BAE500961619 /* DetailWineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654561428F0BAE500961619 /* DetailWineViewController.swift */; };
+		B654561728F0BAF700961619 /* DetailWineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654561628F0BAF700961619 /* DetailWineView.swift */; };
+		B654561928F0BB0400961619 /* DetailWineInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654561828F0BB0400961619 /* DetailWineInfoView.swift */; };
+		B654561B28F0BB0F00961619 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654561A28F0BB0F00961619 /* CustomView.swift */; };
+		B654561D28F0BB2100961619 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654561C28F0BB2100961619 /* CustomLabel.swift */; };
+		B654562128F0BC5F00961619 /* PoorStory-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B654561E28F0BC5F00961619 /* PoorStory-Regular.ttf */; };
+		B654562228F0BC5F00961619 /* GowunBatang-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B654561F28F0BC5F00961619 /* GowunBatang-Regular.ttf */; };
+		B654562328F0BC5F00961619 /* GowunBatang-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B654562028F0BC5F00961619 /* GowunBatang-Bold.ttf */; };
+		B654562728F0C25000961619 /* SortCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654562628F0C25000961619 /* SortCustomCell.swift */; };
+		B654562928F0C26500961619 /* WineListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654562828F0C26500961619 /* WineListCell.swift */; };
+		B654562B28F15AA300961619 /* EditWineInfomationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654562A28F15AA300961619 /* EditWineInfomationVC.swift */; };
 		B6C1694428EAC20300BE77F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1694328EAC20300BE77F8 /* AppDelegate.swift */; };
 		B6C1694828EAC20300BE77F8 /* MyWineListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1694728EAC20300BE77F8 /* MyWineListVC.swift */; };
 		B6C1694D28EAC20400BE77F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6C1694C28EAC20400BE77F8 /* Assets.xcassets */; };
 		B6C1695028EAC20400BE77F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6C1694E28EAC20400BE77F8 /* LaunchScreen.storyboard */; };
 		B6C1695828EAC50900BE77F8 /* AddWineCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1695728EAC50900BE77F8 /* AddWineCategoryVC.swift */; };
 		B6C1695C28EAC64500BE77F8 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1695B28EAC64500BE77F8 /* Singleton.swift */; };
-		B6C1695E28EAC6C200BE77F8 /* SingletonS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1695D28EAC6C200BE77F8 /* SingletonS.swift */; };
-		B6C1696028EAC6CF00BE77F8 /* SingletonY.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1695F28EAC6CF00BE77F8 /* SingletonY.swift */; };
 		B6DB776128ECA6EE00777CB8 /* AddWineInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DB776028ECA6EE00777CB8 /* AddWineInformationVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B635B94E28EDB3DD00622056 /* WineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineModel.swift; sourceTree = "<group>"; };
 		B635B95428EE1D7100622056 /* ETInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETInt.swift; sourceTree = "<group>"; };
+		B654561028F0B49F00961619 /* UIColor_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor_Extension.swift; sourceTree = "<group>"; };
+		B654561428F0BAE500961619 /* DetailWineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWineViewController.swift; sourceTree = "<group>"; };
+		B654561628F0BAF700961619 /* DetailWineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWineView.swift; sourceTree = "<group>"; };
+		B654561828F0BB0400961619 /* DetailWineInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWineInfoView.swift; sourceTree = "<group>"; };
+		B654561A28F0BB0F00961619 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		B654561C28F0BB2100961619 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		B654561E28F0BC5F00961619 /* PoorStory-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PoorStory-Regular.ttf"; sourceTree = "<group>"; };
+		B654561F28F0BC5F00961619 /* GowunBatang-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunBatang-Regular.ttf"; sourceTree = "<group>"; };
+		B654562028F0BC5F00961619 /* GowunBatang-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunBatang-Bold.ttf"; sourceTree = "<group>"; };
+		B654562628F0C25000961619 /* SortCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCustomCell.swift; sourceTree = "<group>"; };
+		B654562828F0C26500961619 /* WineListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineListCell.swift; sourceTree = "<group>"; };
+		B654562A28F15AA300961619 /* EditWineInfomationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineInfomationVC.swift; sourceTree = "<group>"; };
 		B6C1694028EAC20300BE77F8 /* WineLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WineLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6C1694328EAC20300BE77F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6C1694728EAC20300BE77F8 /* MyWineListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWineListVC.swift; sourceTree = "<group>"; };
@@ -31,8 +53,6 @@
 		B6C1695128EAC20400BE77F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6C1695728EAC50900BE77F8 /* AddWineCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineCategoryVC.swift; sourceTree = "<group>"; };
 		B6C1695B28EAC64500BE77F8 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
-		B6C1695D28EAC6C200BE77F8 /* SingletonS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonS.swift; sourceTree = "<group>"; };
-		B6C1695F28EAC6CF00BE77F8 /* SingletonY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonY.swift; sourceTree = "<group>"; };
 		B6DB776028ECA6EE00777CB8 /* AddWineInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineInformationVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,8 +79,56 @@
 			isa = PBXGroup;
 			children = (
 				B635B95428EE1D7100622056 /* ETInt.swift */,
+				B654561028F0B49F00961619 /* UIColor_Extension.swift */,
 			);
 			name = Extension;
+			sourceTree = "<group>";
+		};
+		B654561328F0B54400961619 /* DetailWineView */ = {
+			isa = PBXGroup;
+			children = (
+				B654562D28F15D3D00961619 /* Unused */,
+				B654561428F0BAE500961619 /* DetailWineViewController.swift */,
+				B654561828F0BB0400961619 /* DetailWineInfoView.swift */,
+				B654561A28F0BB0F00961619 /* CustomView.swift */,
+				B654561C28F0BB2100961619 /* CustomLabel.swift */,
+			);
+			name = DetailWineView;
+			sourceTree = "<group>";
+		};
+		B654562428F0BC7100961619 /* Group-ttf */ = {
+			isa = PBXGroup;
+			children = (
+				B654562028F0BC5F00961619 /* GowunBatang-Bold.ttf */,
+				B654561F28F0BC5F00961619 /* GowunBatang-Regular.ttf */,
+				B654561E28F0BC5F00961619 /* PoorStory-Regular.ttf */,
+			);
+			name = "Group-ttf";
+			sourceTree = "<group>";
+		};
+		B654562528F0C22600961619 /* Custom Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B654562628F0C25000961619 /* SortCustomCell.swift */,
+				B654562828F0C26500961619 /* WineListCell.swift */,
+			);
+			name = "Custom Cell";
+			sourceTree = "<group>";
+		};
+		B654562C28F15AA900961619 /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				B654562A28F15AA300961619 /* EditWineInfomationVC.swift */,
+			);
+			name = Edit;
+			sourceTree = "<group>";
+		};
+		B654562D28F15D3D00961619 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				B654561628F0BAF700961619 /* DetailWineView.swift */,
+			);
+			name = Unused;
 			sourceTree = "<group>";
 		};
 		B6C1693728EAC20300BE77F8 = {
@@ -87,13 +155,14 @@
 				B6C1694E28EAC20400BE77F8 /* LaunchScreen.storyboard */,
 				B6C1694328EAC20300BE77F8 /* AppDelegate.swift */,
 				B6C1695B28EAC64500BE77F8 /* Singleton.swift */,
-				B6C1695D28EAC6C200BE77F8 /* SingletonS.swift */,
-				B6C1695F28EAC6CF00BE77F8 /* SingletonY.swift */,
-				B6C1695928EAC58000BE77F8 /* MyWineListVC */,
 				B6C1695A28EAC59700BE77F8 /* AddWineCategoryVC */,
 				B6DB776228ECA6F600777CB8 /* AddWineInformationVC */,
+				B654562C28F15AA900961619 /* Edit */,
+				B6C1695928EAC58000BE77F8 /* MyWineListVC */,
+				B654561328F0B54400961619 /* DetailWineView */,
 				B635B95028EDB3FB00622056 /* Model */,
 				B635B95128EE05B300622056 /* Extension */,
+				B654562428F0BC7100961619 /* Group-ttf */,
 			);
 			path = WineLog;
 			sourceTree = "<group>";
@@ -102,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				B6C1694728EAC20300BE77F8 /* MyWineListVC.swift */,
+				B654562528F0C22600961619 /* Custom Cell */,
 			);
 			name = MyWineListVC;
 			sourceTree = "<group>";
@@ -181,7 +251,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6C1695028EAC20400BE77F8 /* LaunchScreen.storyboard in Resources */,
+				B654562128F0BC5F00961619 /* PoorStory-Regular.ttf in Resources */,
 				B6C1694D28EAC20400BE77F8 /* Assets.xcassets in Resources */,
+				B654562228F0BC5F00961619 /* GowunBatang-Regular.ttf in Resources */,
+				B654562328F0BC5F00961619 /* GowunBatang-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,14 +266,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6C1695828EAC50900BE77F8 /* AddWineCategoryVC.swift in Sources */,
-				B6C1696028EAC6CF00BE77F8 /* SingletonY.swift in Sources */,
-				B6C1695E28EAC6C200BE77F8 /* SingletonS.swift in Sources */,
+				B654561D28F0BB2100961619 /* CustomLabel.swift in Sources */,
+				B654562728F0C25000961619 /* SortCustomCell.swift in Sources */,
+				B654561928F0BB0400961619 /* DetailWineInfoView.swift in Sources */,
+				B654561B28F0BB0F00961619 /* CustomView.swift in Sources */,
 				B6C1695C28EAC64500BE77F8 /* Singleton.swift in Sources */,
 				B635B95528EE1D7100622056 /* ETInt.swift in Sources */,
 				B6C1694828EAC20300BE77F8 /* MyWineListVC.swift in Sources */,
+				B654561528F0BAE500961619 /* DetailWineViewController.swift in Sources */,
 				B6DB776128ECA6EE00777CB8 /* AddWineInformationVC.swift in Sources */,
+				B654561728F0BAF700961619 /* DetailWineView.swift in Sources */,
+				B654562B28F15AA300961619 /* EditWineInfomationVC.swift in Sources */,
 				B635B94F28EDB3DD00622056 /* WineModel.swift in Sources */,
 				B6C1694428EAC20300BE77F8 /* AppDelegate.swift in Sources */,
+				B654561128F0B49F00961619 /* UIColor_Extension.swift in Sources */,
+				B654562928F0C26500961619 /* WineListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

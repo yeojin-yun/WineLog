@@ -4,6 +4,7 @@
 //
 //  Created by 이태형 on 2022/10/05.
 //
+// Create star Array StackView function
 
 import UIKit
 
@@ -58,7 +59,32 @@ class AddWineInformationVC: UIViewController {
         setUI()
         
         if !isAddWine{  //편집모드일때 불러오기
-            
+            let loadWine = Singleton.shared.myWines.filter{$0.id == wineId!}.first!
+            photoView.image = UIImage(data: loadWine.profileData)
+            isNewPhoto = true
+            nameField.text = loadWine.name
+            if let value = loadWine.manufacturingDate{
+                madeDateField.text = value
+            }
+            if let value = loadWine.manufacturingContry{
+                madeContryField.text = value
+            }
+//            if let value = loadWine.drinkDate{
+//                drinkDateField.text = value
+//            }
+            if let value = loadWine.boughtPlace{
+                placeField.text = value
+            }
+            if let value = loadWine.price{
+                priceField.text = value.toDecimalFormat()
+            }
+            if let value = loadWine.comment{
+                commentField.text = value
+            }
+            totalSlider.value = Float(loadWine.totalStar)
+            sugarSlider.value = Float(loadWine.sugarStar)
+            acidSlider.value = Float(loadWine.acidityStar)
+            bodySlider.value = Float(loadWine.bodyStar)
         }
         starAction(totalSlider, totalStarArr, totalLabel, yellowStar)
         starAction(sugarSlider, sugarStarArr, sugarLabel, greenStar)
@@ -130,6 +156,10 @@ extension AddWineInformationVC{
             if Singleton.shared.myWines.count > 0{
                 guard let oldId = Singleton.shared.myWines.sorted(by: {$0.id < $1.id}).last?.id else{
                     return}
+//                if oldId == Int.max{
+//                    //삭제된 element의 id값을 채우기 위해 재초기화
+//                    //그럼에도 Int.max인 경우 더이상 추가 불가능 Alert present
+//                }
                 wineId = oldId + 1
             }else{
                 wineId = 0
@@ -151,10 +181,10 @@ extension AddWineInformationVC{
                                           manufacturingContry: contryText,
                                           boughtPlace: placeText,
                                           price: newPrice,
-                                          totalStar: Double(String(format: "%.1f", round(totalSlider.value)/2))!,
-                                          sugarStar: Double(String(format: "%.1f", round(sugarSlider.value)/2))!,
-                                          acidityStar: Double(String(format: "%.1f", round(acidSlider.value)/2))!,
-                                          bodyStar: Double(String(format: "%.1f", round(bodySlider.value)/2))!,
+                                          totalStar: Int(round(totalSlider.value)),
+                                          sugarStar: Int(round(sugarSlider.value)),
+                                          acidityStar: Int(round(acidSlider.value)),
+                                          bodyStar: Int(round(bodySlider.value)),
                                           comment: comments)
         Singleton.shared.myWines.append(newWineInfo)
         //FileManager Save
@@ -202,25 +232,39 @@ extension AddWineInformationVC: UIImagePickerControllerDelegate, UINavigationCon
 //MARK: Star Slider function
 extension AddWineInformationVC{
     func starAction(_ slider: UISlider, _ stackSubView: [UIImageView], _ label: UILabel, _ color: [String]){
+//        let value = round(slider.value)
+//        var half = value.truncatingRemainder(dividingBy: 2)
+//        for i in 0...4{
+//            if i < Int(value/2){
+//                stackSubView[i].image = UIImage(named: color[0])
+//            }else{
+//                if half != 0{
+//                    stackSubView[i].image = UIImage(named: color[1])
+//                    half = 0
+//                }else{
+//                    stackSubView[i].image = UIImage(named: color[2])
+//                }
+//            }
+//        }
+//        guard var str = label.text else{return}
+//        if str.count > 5 {
+//            str.removeLast(3)
+//        }
+//        label.text = str + String(format: "%.1f", value/2)
         let value = round(slider.value)
-        var half = value.truncatingRemainder(dividingBy: 2)
         for i in 0...4{
-            if i < Int(value/2){
+            if i < Int(value){
                 stackSubView[i].image = UIImage(named: color[0])
             }else{
-                if half != 0{
-                    stackSubView[i].image = UIImage(named: color[1])
-                    half = 0
-                }else{
-                    stackSubView[i].image = UIImage(named: color[2])
-                }
+                stackSubView[i].image = UIImage(named: color[2])
+                
             }
         }
         guard var str = label.text else{return}
         if str.count > 5 {
             str.removeLast(3)
         }
-        label.text = str + String(format: "%.1f", value/2)
+        label.text = str + String(format: "%.1f", value)
     }
     func initStarArr(){
         for i in 0...4{
@@ -346,7 +390,7 @@ extension AddWineInformationVC{
         [nameView,dateView,contryView,placeView,priceView].forEach{
             $0.layer.cornerRadius = 16
             $0.layer.borderWidth = 4
-            $0.layer.borderColor = UIColor.lightGray.cgColor
+            $0.layer.borderColor = #colorLiteral(red: 0.7371826768, green: 0.8078863025, blue: 0.7646051049, alpha: 1)
         }
         [nameField, madeDateField, madeContryField, placeField, priceField].forEach{
             $0.font = .systemFont(ofSize: 18)
@@ -362,9 +406,9 @@ extension AddWineInformationVC{
         commentField.font = .systemFont(ofSize: 16)
         commentField.layer.cornerRadius = 15
         commentField.layer.borderWidth = 4
-        commentField.layer.borderColor = UIColor.lightGray.cgColor
+        commentField.layer.borderColor = #colorLiteral(red: 0.7371826768, green: 0.8078863025, blue: 0.7646051049, alpha: 1)
         placeholderSetting()
-        totalLabel.text = "총평: "
+        totalLabel.text = "별점: "
         sugarLabel.text = "당도: "
         acidLabel.text = "산도: "
         bodyLabel.text = "바디감: "
@@ -374,10 +418,19 @@ extension AddWineInformationVC{
             $0.font = .systemFont(ofSize: 16)
             $0.textColor = .black
         }
+//        [totalSlider, sugarSlider, acidSlider, bodySlider].forEach{
+//            $0.maximumValue = 10.0
+//            $0.minimumValue = 0.0
+//            $0.value = 5.0
+//            $0.thumbTintColor = .clear
+//            $0.tintColor = .clear
+//            $0.alpha = 0.1
+//            $0.addTarget(self, action: #selector(didChangeSlider(_:)), for: .valueChanged)
+//        }
         [totalSlider, sugarSlider, acidSlider, bodySlider].forEach{
-            $0.maximumValue = 10.0
+            $0.maximumValue = 5.0
             $0.minimumValue = 0.0
-            $0.value = 5.0
+            $0.value = 3.0
             $0.thumbTintColor = .clear
             $0.tintColor = .clear
             $0.alpha = 0.1
