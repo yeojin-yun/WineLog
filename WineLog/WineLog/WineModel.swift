@@ -5,12 +5,43 @@
 //  Created by 이태형 on 2022/10/05.
 //
 
-import Foundation
+import UIKit
 
 enum WineType: Codable{
     case white
     case red
     case rose
+    
+    var wineType: String {
+        switch self {
+        case .white:
+            return "white"
+        case .red:
+            return "red"
+        case .rose:
+            return "rose"
+        }
+    }
+    
+    var wineColor: UIColor {
+        switch self {
+        case .white:
+            return UIColor.whiteWineColor
+        case .red:
+            return UIColor.redWineColor
+        case .rose:
+            return UIColor.roseWineColor
+        }
+    }
+    
+    var wineTextColor: UIColor {
+        switch self {
+        case .white, .rose:
+            return UIColor.myGreen!
+        case .red:
+            return UIColor.white
+        }
+    }
 }
 
 struct WineInformation: Codable{

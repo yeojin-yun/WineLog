@@ -5,6 +5,7 @@
 //  Created by 순진이 on 2022/10/07.
 //
 
+
 import UIKit
 
 class CustomLabel: UILabel {
@@ -29,11 +30,12 @@ class CustomLabel: UILabel {
     
     init() {
         super.init(frame: .zero)
-        text = "저녁 때 돌아갈 집이 있다는 것\n힘들 때 마음 속으로 생각 할 사람이 있다는 것\n외로울 때 혼자서 부를 노래 있다는 것"
+        text = ""
         font = UIFont(name: "GowunBatang-Regular", size: 15)
         backgroundColor = .lightGray.withAlphaComponent(0.2)
         numberOfLines = 0
-        
+        layer.cornerRadius = 10
+        layer.masksToBounds = true
     }
     
     required init?(coder: NSCoder) {

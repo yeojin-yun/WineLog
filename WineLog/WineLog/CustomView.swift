@@ -60,8 +60,9 @@ class CustomLabelView: UIView {
 class CustomGradeView: UIView {
     
     let titleLabel = UILabel()
-    var imageViewArray = [UIImageView(image: UIImage(systemName: "star.fill")), UIImageView(image: UIImage(systemName: "star.fill")),UIImageView(image: UIImage(systemName: "star.fill")),UIImageView(image: UIImage(systemName: "star.fill")),UIImageView(image: UIImage(systemName: "star.fill"))]
-
+    var starArray = [UIImageView]()
+    let starStack = UIStackView()
+    //var imageViewArray = [UIImageView(image: UIImage(systemName: "star.fill")), UIImageView(image: UIImage(systemName: "star.fill")),UIImageView(image: UIImage(systemName: "star.fill")),UIImageView(image: UIImage(systemName: "star.fill")),UIImageView(image: UIImage(systemName: "star.fill"))]
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -79,12 +80,22 @@ class CustomGradeView: UIView {
     }
     
     func setUI() {
-        let imageStackView = UIStackView(arrangedSubviews: imageViewArray)
-        imageStackView.axis = .horizontal
-        imageStackView.distribution = .fillEqually
-        imageStackView.spacing = 2
+
+        for _ in 0...4 {
+            let imageView = UIImageView()
+            imageView.image = UIImage(named: "star_empty")
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.tintColor = .lightGray
+            imageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: 18).isActive = true
+            starStack.addArrangedSubview(imageView)
+        }
         
-        [titleLabel, imageStackView].forEach {
+        for i in 0...4{
+            starArray.append(starStack.subviews[i] as? UIImageView ?? UIImageView())
+        }
+        
+        [titleLabel, starStack].forEach {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -94,15 +105,12 @@ class CustomGradeView: UIView {
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
             titleLabel.widthAnchor.constraint(equalToConstant: 50),
             
-            imageStackView.topAnchor.constraint(equalTo: titleLabel.topAnchor),
-            imageStackView.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
+            starStack.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            starStack.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
         ])
     }
     
     func setAttributes() {
-        for imageView in imageViewArray {
-            imageView.tintColor = .myYellow
-        }
         
         [titleLabel].forEach {
             
@@ -112,7 +120,17 @@ class CustomGradeView: UIView {
             
         }
     }
-    
     //들어오는 Double 값에 따라 별을 색칠해줘야 함
+    func setStarStack(_ starValue: Int, _ stackArray: [UIImageView]) {
+        for i in 0...4 {
+            stackArray[i].image = i < starValue ? UIImage(named: "yellow_star_full") : UIImage(named: "star_empty")
+        }
+ 
+    }
     
+//    func setStarStackTest(_ starValue: Int) {
+//        for i in 0...starValue {
+//
+//        }
+//    }
 }

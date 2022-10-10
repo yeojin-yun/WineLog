@@ -13,6 +13,12 @@ class Singleton{
     
     var myWines = [WineInformation]()
     
+    //sortMember
+    var wineType = 0
+    var wineTypeValue: [WineType] = [.white, .red, .rose]
+    var wineStar = 0
+    
+    //FileManager
     func getDirectoryPath()-> URL{
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }

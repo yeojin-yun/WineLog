@@ -16,7 +16,7 @@ class DetailWineInfoView: UIView {
     // 와인이름
     let wineNameLabel = UILabel()
     // 와인종류
-    let wineTypeLabel = UILabel()
+    let wineTypeLabel = CustomLabel(padding: UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4))
     // 산지
     let manufacturingContryLabel = UILabel()
     // 제조일
@@ -77,16 +77,18 @@ class DetailWineInfoView: UIView {
         [manufacturingContryLabel, manufacturingDateLabel].forEach {
             $0.font = .systemFont(ofSize: 14)
             $0.textAlignment = .center
-            $0.textColor = .gray
+            $0.textColor = .darkGray
             manufacturingContryLabel.text = "미국"
             manufacturingDateLabel.text = "2020"
         }
     }
     
     func setFirstUI() {
+        manufacturingContryLabel.textAlignment = .right
+        
         let labelStackView = UIStackView(arrangedSubviews: [manufacturingContryLabel, wineTypeLabel, manufacturingDateLabel])
         labelStackView.axis = .horizontal
-        labelStackView.distribution = .fillEqually
+//        labelStackView.distribution = .fillEqually
         labelStackView.spacing = 5
         
         [wineImage, wineNameLabel, labelStackView, totalStarLabel].forEach {
@@ -100,12 +102,12 @@ class DetailWineInfoView: UIView {
         totalStarLabel.titleLabel.text = ""
         NSLayoutConstraint.activate([
             firstBackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            firstBackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30),
+            firstBackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             firstBackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             firstBackView.heightAnchor.constraint(equalToConstant: 370),
             
-            totalStarLabel.topAnchor.constraint(equalTo: wineNameLabel.bottomAnchor, constant: 10),
-            totalStarLabel.centerXAnchor.constraint(equalTo: wineNameLabel.centerXAnchor, constant: -110),
+            totalStarLabel.topAnchor.constraint(equalTo: wineNameLabel.bottomAnchor, constant: 20),
+            totalStarLabel.centerXAnchor.constraint(equalTo: wineNameLabel.centerXAnchor, constant: -100),
             
             wineImage.leadingAnchor.constraint(equalTo: firstBackView.leadingAnchor, constant: 30),
             wineImage.topAnchor.constraint(equalTo: firstBackView.topAnchor, constant: 30),
@@ -145,9 +147,11 @@ class DetailWineInfoView: UIView {
         commentOfWineLabel.font = UIFont(name: "GowunBatang-Regular", size: 15)
         commentOfWineLabel.backgroundColor = .lightGray.withAlphaComponent(0.2)
         commentOfWineLabel.numberOfLines = 0
+        commentOfWineLabel.layer.cornerRadius = 10
+        commentOfWineLabel.layer.masksToBounds = true
         
         NSLayoutConstraint.activate([
-            secondBackView.topAnchor.constraint(equalTo: firstBackView.bottomAnchor, constant: 20),
+            secondBackView.topAnchor.constraint(equalTo: firstBackView.bottomAnchor, constant: 0),
             secondBackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             secondBackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             secondBackView.bottomAnchor.constraint(equalTo: starStackView.bottomAnchor, constant: 20),
@@ -160,10 +164,24 @@ class DetailWineInfoView: UIView {
             starStackView.topAnchor.constraint(equalTo: labelStack.topAnchor, constant: 10),
             sugarStarLabel.heightAnchor.constraint(equalToConstant: 20),
             
-            commentOfWineLabel.topAnchor.constraint(equalTo: starStackView.bottomAnchor, constant: 30),
+            commentOfWineLabel.topAnchor.constraint(equalTo: starStackView.bottomAnchor, constant: 20),
             commentOfWineLabel.leadingAnchor.constraint(equalTo: secondBackView.leadingAnchor),
             commentOfWineLabel.trailingAnchor.constraint(equalTo: secondBackView.trailingAnchor),
 //            commentOfWineLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -130)
         ])
+    }
+    
+    
+    func setStarImage(body: Int, sugar: Int, acid: Int, total: Int) {
+        bodyStarLabel.setStarStack(body, bodyStarLabel.starArray)
+        sugarStarLabel.setStarStack(sugar, sugarStarLabel.starArray)
+        acidityStarLabel.setStarStack(acid, acidityStarLabel.starArray)
+        totalStarLabel.setStarStack(total, totalStarLabel.starArray)
+    }
+    
+    func setTypeLabel(_ type: WineType) {
+        wineTypeLabel.text = type.wineType
+        wineTypeLabel.backgroundColor = type.wineColor
+        wineTypeLabel.textColor = type.wineTextColor
     }
 }
