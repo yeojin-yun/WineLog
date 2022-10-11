@@ -375,16 +375,16 @@ extension EditWineInfomationVC{
             switch wineType{
             case .white:
                 $0.text = "white"
-                $0.backgroundColor = .white
-                $0.textColor = .black
+                $0.backgroundColor = wineType.wineColor
+                $0.textColor = wineType.wineTextColor
             case .red:
                 $0.text = "red"
-                $0.backgroundColor = .red
-                $0.textColor = .white
+                $0.backgroundColor = wineType.wineColor
+                $0.textColor = wineType.wineTextColor
             case .rose:
                 $0.text = "rose"
-                $0.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
-                $0.textColor = .white
+                $0.backgroundColor = wineType.wineColor
+                $0.textColor = wineType.wineTextColor
             case .none:
                 print("Wine Type Error")
             }
@@ -531,7 +531,7 @@ extension EditWineInfomationVC{
             addPhotoBtn.leadingAnchor.constraint(equalTo: photoView.leadingAnchor),
             addPhotoBtn.trailingAnchor.constraint(equalTo: photoView.trailingAnchor),
             
-            wineTypeLabel.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: 30),
+            wineTypeLabel.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: 20),
             wineTypeLabel.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
             
             madeContryField.centerYAnchor.constraint(equalTo: wineTypeLabel.centerYAnchor),
