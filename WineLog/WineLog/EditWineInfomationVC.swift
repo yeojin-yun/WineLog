@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol EditDelegate: AnyObject {
+    func getData(_ data: WineInformation)
+}
+
 class EditWineInfomationVC: UIViewController {
+    weak var delegate: EditDelegate?
+    
     var wineType: WineType!
     var isAddWine: Bool!  //추가모드: true / 편집모드: false
     var wineId: Int?  //편집모드 시 ID로 받기
@@ -285,7 +291,10 @@ extension EditWineInfomationVC{
                                           bodyStar: Int(round(bodySlider.value)),
                                           comment: comments)
         Singleton.shared.myWines.append(newWineInfo)
+        
+        delegate?.getData(newWineInfo)
         //FileManager Save
+        print(#function, newWineInfo.totalStar)
         saveToJson(Singleton.shared.myWines)
     }
 }
