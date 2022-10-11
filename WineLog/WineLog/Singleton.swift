@@ -13,10 +13,6 @@ class Singleton{
     
     var myWines = [WineInformation]()
     
-    //sortMember
-    var wineType = 0
-    var wineTypeValue: [WineType] = [.white, .red, .rose]
-    var wineStar = 0
     
     //FileManager
     func getDirectoryPath()-> URL{
@@ -31,5 +27,16 @@ class Singleton{
         let folderPath = getFolderPath()
         let filePath = folderPath.appendingPathComponent("test.json")
         return filePath
+    }
+    //FileManager - Load
+    func loadFromJson(){
+        let jsonDecoder = JSONDecoder()
+        do{
+            let data = try Data(contentsOf: getFilePath(), options: .mappedIfSafe)
+            let received = try jsonDecoder.decode([WineInformation].self, from: data)
+            myWines = received
+        }catch{
+            print(error.localizedDescription)
+        }
     }
 }

@@ -8,7 +8,8 @@
 import UIKit
 
 class AddWineCategoryVC: UIViewController {
-    let testBtn = UIButton()  //REMOVE
+    
+    let infoLabel = CustomLabel()
     
     let redWineButton = UIButton()
     let whiteWineButton = UIButton()
@@ -18,46 +19,38 @@ class AddWineCategoryVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        loadFromJson()
+        Singleton.shared.loadFromJson()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
 }
 //MARK: - Button Action
 extension AddWineCategoryVC{
     @objc func wineButtonTapped(_ sender: UIButton) {
-//        let nextVC = AddWineInformationVC()
-        let nextVC = EditWineInfomationVC()
-        nextVC.isAddWine = true
-        switch sender{
-        case redWineButton:
-            nextVC.wineType = .red
-        case whiteWineButton:
-            nextVC.wineType = .white
-        case roseWindeButton:
-            nextVC.wineType = .rose
-//            nextVC.isAddWine = false
-//            nextVC.wineId = 0
+        switch sender.configuration?.title {
+        case "red":
+            addWineToNextVC(.red)
+        case "white":
+            addWineToNextVC(.white)
+        case "rose":
+            addWineToNextVC(.rose)
         default:
-            print("Not Exist Button")
-            return
+            break
         }
-        navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    //REMOVE
-    @objc func didTapTest(_ sender: UIButton){
-        let jsonDecoder = JSONDecoder()
-        do{
-            let data = try Data(contentsOf: Singleton.shared.getFilePath(), options: .mappedIfSafe)
-            let received = try jsonDecoder.decode([WineInformation].self, from: data)
-            let loadData = received
-            print(loadData)
-        }catch{
-            print(error.localizedDescription)
-        }
+    func addWineToNextVC(_ wineType: WineType) {
+//        let nextVC = AddWineInformationVC()
+        let nextVC = EditWineInfomationVC()
+        nextVC.wineType = wineType
+        nextVC.isAddWine = true
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
+//MARK: -UI
 extension AddWineCategoryVC{
     private func configureUI() {
         setNavigation()
@@ -73,17 +66,18 @@ extension AddWineCategoryVC{
     }
     
     private func setAttributes() {
-        redWineButton.setTitle("red", for: .normal)
-        redWineButton.setTitleColor(UIColor.red, for: .normal)
-//        redWineButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 30)
-        redWineButton.imageView?.contentMode = .scaleAspectFill
-        redWineButton.setImage(UIImage(named: "redWine"), for: .normal)
-        whiteWineButton.setImage(UIImage(named: "whiteWine"), for: .normal)
-        whiteWineButton.setTitle("white", for: .normal)
-        whiteWineButton.imageView?.contentMode = .scaleAspectFill
-        roseWindeButton.setImage(UIImage(named: "roseWine"), for: .normal)
-        roseWindeButton.setTitle("rose", for: .normal)
-        roseWindeButton.imageView?.contentMode = .scaleAspectFill
+        guard let redImage = UIImage(named: "redWine") else { return }
+        guard let whiteImage = UIImage(named: "whiteWine") else { return }
+        guard let roseImage = UIImage(named: "roseWine") else { return }
+        redWineButton.configuration = .setWineButtonStyle("red", image: redImage)
+        whiteWineButton.configuration = .setWineButtonStyle("white", image: whiteImage)
+        roseWindeButton.configuration = .setWineButtonStyle("rose", image: roseImage)
+        
+        [infoLabel].forEach {
+            $0.text = "기록하고 싶은 와인을\n눌러주세요."
+            $0.font = UIFont(name: "GowunBatang-Regular", size: 20)
+            $0.textAlignment = .center
+        }
     }
     
     private func addTarget() {
@@ -92,7 +86,7 @@ extension AddWineCategoryVC{
         roseWindeButton.addTarget(self, action: #selector(wineButtonTapped(_:)), for: .touchUpInside)
     }
     
-    private func setConstraints(){
+    private func setConstraints() {
         buttonStackView.addArrangedSubview(whiteWineButton)
         buttonStackView.addArrangedSubview(roseWindeButton)
         buttonStackView.addArrangedSubview(redWineButton)
@@ -101,46 +95,22 @@ extension AddWineCategoryVC{
         buttonStackView.distribution = .fillEqually
         buttonStackView.spacing = 3
         
-        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(buttonStackView)
-//        view.addSubview(redWineButton)
-        
-        //REMOVE
-        testBtn.setTitle("LOAD", for: .normal)
-        testBtn.setTitleColor(.blue, for: .normal)
-        testBtn.addTarget(self, action: #selector(didTapTest), for: .touchUpInside)
-        view.addSubview(testBtn)
-        testBtn.translatesAutoresizingMaskIntoConstraints = false
+        [buttonStackView, infoLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
         
         NSLayoutConstraint.activate([
-//            buttonStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-//            buttonStackView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
+            infoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
             buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             buttonStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            buttonStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-//            redWineButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-//            redWineButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-//            redWineButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-//            redWineButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+//            buttonStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 250),
+            buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -250),
             redWineButton.widthAnchor.constraint(equalToConstant: 30),
-            
-            //REMOVE
-            testBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            testBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
-    }
-}
+            redWineButton.heightAnchor.constraint(equalToConstant: 150)
 
-extension AddWineCategoryVC { //load json to singlton
-    func loadFromJson(){
-        let jsonDecoder = JSONDecoder()
-        do{
-            let data = try Data(contentsOf: Singleton.shared.getFilePath(), options: .mappedIfSafe)
-            let received = try jsonDecoder.decode([WineInformation].self, from: data)
-            Singleton.shared.myWines = received
-        }catch{
-            print(error.localizedDescription)
-        }
+        ])
     }
 }

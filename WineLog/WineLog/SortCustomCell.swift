@@ -28,16 +28,14 @@ extension SortCustomCell {
 
         label.text = "test"
 
-        contentView.addSubview((label))
         layer.masksToBounds = true
-        layer.cornerRadius = 10
+        layer.cornerRadius = 20
         layer.borderColor =  #colorLiteral(red: 0.7447593808, green: 0.8098963499, blue: 0.7396327853, alpha: 1)
         layer.borderWidth = 2
-        label.textColor = #colorLiteral(red: 0.1236173734, green: 0.3619198501, blue: 0.2140165269, alpha: 1)
-        
+        label.textColor = .myGreen
         label.font = .boldSystemFont(ofSize: 15)
        
-
+        contentView.addSubview((label))
         label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),

@@ -10,12 +10,12 @@ import UIKit
 
 
 final class DetailWineViewController: UIViewController {
-    let fileManager = FileManager.default
 //    let detailWineView = DetailWineView()
     let detailWineView = DetailWineInfoView()
 //    lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "pencil"), style: .plain, target: nil, action: nil)
 //    lazy var rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
-    lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "wineEdit"), style: .plain, target: nil, action: nil)
+//    lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "wineEdit"), style: .plain, target: nil, action: nil)
+    lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "wineEdit"), style: .plain, target: self, action: #selector(didTapEditBtn(_:)))
 
     var wineModel: WineInformation {
         didSet {
@@ -33,7 +33,6 @@ final class DetailWineViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 
     override func loadView() {
         super.loadView()
@@ -64,6 +63,13 @@ extension DetailWineViewController {
         detailWineView.commentOfWineLabel.text = wineModel.comment ?? "한줄평"
 
     }
+    @objc func didTapEditBtn(_ sender: UIBarButtonItem){
+        let nextVC = EditWineInfomationVC()
+        nextVC.isAddWine = false
+        nextVC.wineId = wineModel.id
+        nextVC.wineType = wineModel.type
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
 }
 //MARK: -UI
 extension DetailWineViewController {
@@ -84,7 +90,6 @@ extension DetailWineViewController {
     }
     
     private func addTarget() {
-        
     }
     
     private func setConstraints() {

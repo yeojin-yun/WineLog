@@ -28,7 +28,7 @@ class WineListCell: UICollectionViewCell {
 }
 extension WineListCell {
     func setUI() {
-        imageView.image = UIImage(named: "이미지테스트")
+        imageView.image = UIImage(named: "wineTest")
         imageView.layer.cornerRadius = 10
 
         nameLabel.font = .boldSystemFont(ofSize: 17)
@@ -66,8 +66,8 @@ extension WineListCell {
             scoreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -10),
             scoreLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
-            typeImageView.topAnchor.constraint(equalTo: imageView.topAnchor,constant: -8),
-            typeImageView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor,constant: -8),
+            typeImageView.topAnchor.constraint(equalTo: imageView.topAnchor,constant: -5),
+            typeImageView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor,constant: -5),
             typeImageView.heightAnchor.constraint(equalToConstant: 30),
             typeImageView.widthAnchor.constraint(equalTo: typeImageView.heightAnchor)
 
