@@ -15,8 +15,14 @@ final class DetailWineViewController: UIViewController {
     let detailWineView = DetailWineInfoView()
     lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "wineEdit"), style: .plain, target: self, action: #selector(didTapEditBtn(_:)))
 
-    var wineModel: WineInformation?
+//    var wineModel: WineInformation?
 
+    var wineModel: WineInformation {
+        didSet {
+            
+        }
+    }
+    
     override func loadView() {
         super.loadView()
         view = detailWineView
@@ -28,16 +34,16 @@ final class DetailWineViewController: UIViewController {
         configureUI()
         
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+
+    init(wineModel: WineInformation) {
+        self.wineModel = wineModel
+        super.init(nibName: nil, bundle: nil)
         print(#function)
-//        self.setData()
+        setData()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print(#function)
-        self.setData()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -50,7 +56,7 @@ extension DetailWineViewController: EditDelegate {
     }
     
     private func setData() {
-        guard let wineModel = wineModel else { return }
+//        guard let wineModel = wineModel else { return }
         print(#function, wineModel.totalStar)
         detailWineView.manufacturingContryLabel.text = wineModel.manufacturingContry
         detailWineView.setTypeLabel(wineModel.type)
@@ -68,7 +74,7 @@ extension DetailWineViewController: EditDelegate {
     
     @objc func didTapEditBtn(_ sender: UIBarButtonItem){
         let nextVC = EditWineInfomationVC()
-        guard let wineModel = wineModel else { return }
+//        guard let wineModel = wineModel else { return }
         nextVC.isAddWine = false
         nextVC.wineId = wineModel.id
         nextVC.wineType = wineModel.type

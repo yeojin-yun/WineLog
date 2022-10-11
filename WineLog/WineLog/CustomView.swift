@@ -53,7 +53,7 @@ class CustomLabelView: UIView {
             infoLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 10),
             infoLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor),
             infoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            infoLabel.widthAnchor.constraint(equalToConstant: 80)
+            infoLabel.widthAnchor.constraint(equalToConstant: 90)
         ])
     }
 }

@@ -106,8 +106,8 @@ extension MyWineListVC: UICollectionViewDelegate {
                 fatalError()
             }
         } else {
-            let detailWineVC = DetailWineViewController()
-            detailWineVC.wineModel = outputWineList[indexPath.item]
+            let detailWineVC = DetailWineViewController(wineModel: outputWineList[indexPath.item])
+//            detailWineVC.wineModel = outputWineList[indexPath.item]
             self.navigationController?.pushViewController(detailWineVC, animated: true)
         }
     }
