@@ -9,13 +9,13 @@ import UIKit
 
 class MyWineListVC: UIViewController {
     //sortMember
-    var sortsData = ["와인종류","별점","가격순"]
-    var criteria = [0, 0, 0]
+    var sortsData = ["와인종류","별점","가격순", "되돌리기"]
+    var criteria = [0, 0, 0, 0]
     var wineTypeValue: [WineType] = [.white, .red, .rose]
     let typeText = ["ALL", "WHITE", "RED", "ROSE"]
 //    let starText = ["ALL", "★★★★☆~★★★★★", "★★☆☆☆~★★★☆☆", "☆☆☆☆☆~★☆☆☆☆"]
     let starText = ["ALL", "별 4 ~ 5", "별 2 ~ 3", "별 0 ~ 1"]
-    let priceText = ["ALL", "낮은 가격순", "높은 가격순"]
+    let priceText = ["가격순", "낮은 가격순", "높은 가격순"]
     
     let flowLayout1 = UICollectionViewFlowLayout()
     lazy var sortCV = UICollectionView(frame: .zero, collectionViewLayout: flowLayout1)
@@ -82,6 +82,8 @@ extension MyWineListVC: UICollectionViewDataSource {
                     cell.label.text = self.starText[self.criteria[1]]
                 case 2:
                     cell.label.text = self.priceText[self.criteria[2]]
+                case 3:
+                    cell.label.text = "되돌리기"
                 default:
                     print("No More Sort Criteria ")
                 }
@@ -102,6 +104,13 @@ extension MyWineListVC: UICollectionViewDelegate {
                 starActionSheet()
             case 2:
                 priceActionSheet()
+            case 3:
+                criteria[0] = 0
+                criteria[1] = 0
+                criteria[2] = 0
+                self.outputWineList = self.wineListFilter()
+                self.listCV.reloadData()
+                self.sortCV.reloadData()
             default:
                 fatalError()
             }
@@ -207,6 +216,8 @@ extension MyWineListVC {
             }
             typeSheet.addAction(actionItem)
         }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        typeSheet.addAction(cancelAction)
         
         typeSheet.view.tintColor = .myGreen
         
@@ -224,6 +235,8 @@ extension MyWineListVC {
             }
             starSheet.addAction(actionItem)
         }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        starSheet.addAction(cancelAction)
         
         starSheet.view.tintColor = .myGreen
         
@@ -232,6 +245,12 @@ extension MyWineListVC {
     
     func priceActionSheet() { //가격순
         let priceSheet = UIAlertController(title: "가격", message: nil, preferredStyle: .actionSheet)
+        let wineType0 = UIAlertAction(title: priceText[0], style: .default) { (UIAlertAction) in
+            self.criteria[2] = 0
+            self.outputWineList = self.wineListFilter()
+            self.listCV.reloadData()
+            self.sortCV.reloadData()
+        }
         let wineType1 = UIAlertAction(title: priceText[1], style: .default) { (UIAlertAction) in
             self.criteria[2] = 1
             self.outputWineList = self.wineListFilter()
@@ -244,13 +263,9 @@ extension MyWineListVC {
             self.listCV.reloadData()
             self.sortCV.reloadData()
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (UIAlertAction) in
-            self.criteria[2] = 0
-            self.outputWineList = self.wineListFilter()
-            self.listCV.reloadData()
-            self.sortCV.reloadData()
-        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
+        priceSheet.addAction(wineType0)
         priceSheet.addAction(wineType1)
         priceSheet.addAction(wineType2)
         priceSheet.addAction(cancelAction)
@@ -277,6 +292,7 @@ extension MyWineListVC {
         flowLayout1.minimumLineSpacing = 5 //아이템간의 세로거리
         flowLayout1.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5) //테두리 거리
         flowLayout1.scrollDirection = .horizontal
+        sortCV.showsHorizontalScrollIndicator = false
         
         sortCV.dataSource = self
         sortCV.delegate = self

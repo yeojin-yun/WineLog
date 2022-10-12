@@ -88,6 +88,10 @@ class EditWineInfomationVC: UIViewController {
         if !isAddWine{
             loadInformation()
         }
+        if commentField.text.count == 0{
+            commentField.text = "한줄평을 작성해 주세요."
+            commentField.textColor = UIColor.lightGray
+        }
         starAction(totalSlider, totalStarArr)
         starAction(sugarSlider, sugarStarArr)
         starAction(acidSlider, acidStarArr)
@@ -480,7 +484,7 @@ extension EditWineInfomationVC{
         commentBackView.backgroundColor = .lightGray.withAlphaComponent(0.2)
         commentField.backgroundColor = .clear
         commentField.font = UIFont(name: "GowunBatang-Regular", size: 15)
-        placeholderSetting()
+        commentField.delegate = self
     }
     
     private func setUI(){
@@ -683,11 +687,6 @@ extension EditWineInfomationVC: UITextFieldDelegate{
 }
 //MARK: UITextViewDelegate
 extension EditWineInfomationVC: UITextViewDelegate{
-    func placeholderSetting(){
-        commentField.delegate = self
-        commentField.text = "한줄평을 작성해 주세요."
-        commentField.textColor = UIColor.lightGray
-    }
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
