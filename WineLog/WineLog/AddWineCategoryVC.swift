@@ -75,7 +75,7 @@ extension AddWineCategoryVC{
         
         [infoLabel].forEach {
             $0.text = "기록하고 싶은 와인을\n눌러주세요."
-            $0.font = UIFont(name: "GowunBatang-Regular", size: 20)
+            $0.font = UIFont(name: "GowunBatang-Regular", size: 18)
             $0.textAlignment = .center
         }
     }
@@ -101,13 +101,13 @@ extension AddWineCategoryVC{
         }
         
         NSLayoutConstraint.activate([
-            infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
+            infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
             infoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             buttonStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
 //            buttonStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 250),
-            buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -250),
+            buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -200),
             redWineButton.widthAnchor.constraint(equalToConstant: 30),
             redWineButton.heightAnchor.constraint(equalToConstant: 150)
 

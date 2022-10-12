@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol EditDelegate: AnyObject {
+    func getData(_ data: WineInformation)
+}
+
 class EditWineInfomationVC: UIViewController {
+    weak var delegate: EditDelegate?
+    
     var wineType: WineType!
     var isAddWine: Bool!  //추가모드: true / 편집모드: false
     var wineId: Int?  //편집모드 시 ID로 받기
@@ -285,7 +291,10 @@ extension EditWineInfomationVC{
                                           bodyStar: Int(round(bodySlider.value)),
                                           comment: comments)
         Singleton.shared.myWines.append(newWineInfo)
+        
+        delegate?.getData(newWineInfo)
         //FileManager Save
+        print(#function, newWineInfo.totalStar)
         saveToJson(Singleton.shared.myWines)
     }
 }
@@ -366,16 +375,16 @@ extension EditWineInfomationVC{
             switch wineType{
             case .white:
                 $0.text = "white"
-                $0.backgroundColor = .white
-                $0.textColor = .black
+                $0.backgroundColor = wineType.wineColor
+                $0.textColor = wineType.wineTextColor
             case .red:
                 $0.text = "red"
-                $0.backgroundColor = .red
-                $0.textColor = .white
+                $0.backgroundColor = wineType.wineColor
+                $0.textColor = wineType.wineTextColor
             case .rose:
                 $0.text = "rose"
-                $0.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
-                $0.textColor = .white
+                $0.backgroundColor = wineType.wineColor
+                $0.textColor = wineType.wineTextColor
             case .none:
                 print("Wine Type Error")
             }
@@ -522,7 +531,7 @@ extension EditWineInfomationVC{
             addPhotoBtn.leadingAnchor.constraint(equalTo: photoView.leadingAnchor),
             addPhotoBtn.trailingAnchor.constraint(equalTo: photoView.trailingAnchor),
             
-            wineTypeLabel.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: 30),
+            wineTypeLabel.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: 20),
             wineTypeLabel.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
             
             madeContryField.centerYAnchor.constraint(equalTo: wineTypeLabel.centerYAnchor),

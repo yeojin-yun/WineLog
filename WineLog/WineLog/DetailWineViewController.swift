@@ -10,17 +10,29 @@ import UIKit
 
 
 final class DetailWineViewController: UIViewController {
-//    let detailWineView = DetailWineView()
+    let sigleton = Singleton.shared.myWines
+    
     let detailWineView = DetailWineInfoView()
-//    lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "pencil"), style: .plain, target: nil, action: nil)
-//    lazy var rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
-//    lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "wineEdit"), style: .plain, target: nil, action: nil)
     lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "wineEdit"), style: .plain, target: self, action: #selector(didTapEditBtn(_:)))
+
+//    var wineModel: WineInformation?
 
     var wineModel: WineInformation {
         didSet {
             
         }
+    }
+    
+    override func loadView() {
+        super.loadView()
+        view = detailWineView
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        print(#function)
+        configureUI()
+        
     }
 
     init(wineModel: WineInformation) {
@@ -33,41 +45,41 @@ final class DetailWineViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func loadView() {
-        super.loadView()
-        view = detailWineView
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print(#function)
-        configureUI()
-        
-    }
-
 }
 
-extension DetailWineViewController {
+
+extension DetailWineViewController: EditDelegate {
+    func getData(_ data: WineInformation) {
+        print(#function, data.totalStar)
+        wineModel = data
+        setData()
+    }
+    
     private func setData() {
+//        guard let wineModel = wineModel else { return }
+        print(#function, wineModel.totalStar)
         detailWineView.manufacturingContryLabel.text = wineModel.manufacturingContry
         detailWineView.setTypeLabel(wineModel.type)
-        print(type(of: wineModel.profileData))
         detailWineView.wineImage.image = UIImage(data: wineModel.profileData)
         detailWineView.manufacturingDateLabel.text = wineModel.manufacturingDate
         detailWineView.wineNameLabel.text = wineModel.name
-        detailWineView.boughtDateLabel.infoLabel.text = wineModel.drinkDate ?? "0000.00.00"
-        detailWineView.boughtPlaceLabel.infoLabel.text = wineModel.boughtPlace
-        guard let winePrice = wineModel.price else { return }
-        detailWineView.priceOfWineLabel.infoLabel.text = winePrice.toDecimalFormat() + "원"
+        detailWineView.boughtDateLabel.infoLabel.text = wineModel.drinkDate == "" ? "-" : wineModel.drinkDate
+        detailWineView.boughtPlaceLabel.infoLabel.text = wineModel.boughtPlace ?? "-"
+        let winePrice = wineModel.price?.toDecimalFormat() ?? ""
+        detailWineView.priceOfWineLabel.infoLabel.text = winePrice == "" ? "-" : winePrice + "원"
         detailWineView.setStarImage(body: wineModel.bodyStar, sugar: wineModel.sugarStar, acid: wineModel.acidityStar, total: wineModel.totalStar)
         detailWineView.commentOfWineLabel.text = wineModel.comment ?? "한줄평"
 
     }
+    
     @objc func didTapEditBtn(_ sender: UIBarButtonItem){
         let nextVC = EditWineInfomationVC()
+//        guard let wineModel = wineModel else { return }
         nextVC.isAddWine = false
         nextVC.wineId = wineModel.id
         nextVC.wineType = wineModel.type
+        nextVC.delegate = self
+        print(#function)
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }
