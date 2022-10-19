@@ -52,14 +52,15 @@ extension MyWineListVC: UICollectionViewDataSource {
         if collectionView == listCV {
             guard let cell = listCV.dequeueReusableCell(withReuseIdentifier: WineListCell.identifier, for: indexPath) as? WineListCell else{fatalError()}
             
-            switch outputWineList[indexPath.item].type {
-            case .white:
-                cell.typeImageView.image = UIImage(named: "whiteIcon")
-            case .rose:
-                cell.typeImageView.image = UIImage(named: "roseIcon")
-            case .red:
-                cell.typeImageView.image = UIImage(named: "redIcon")
-            }
+//            switch outputWineList[indexPath.item].type {
+//            case .white:
+//                cell.typeLabel.text = "white"
+//            case .rose:
+//                cell.typeLabel.text = "rose"
+//            case .red:
+//                cell.typeLabel.text = "red"
+//            }
+            cell.setTypeLabel(type: outputWineList[indexPath.item].type)
             cell.imageView.image = UIImage(data: outputWineList[indexPath.item].profileData)
             cell.nameLabel.text = outputWineList[indexPath.item].name
             if let priceValue: Int = outputWineList[indexPath.item].price {
@@ -130,7 +131,7 @@ extension MyWineListVC {
             //Item
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 10, bottom: 7, trailing: 7)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 10, bottom: 10, trailing: 7)
             
             //Group (row)  //세로길이: 33% , 그룹당 아이템 개수: 3
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: NSCollectionLayoutDimension.fractionalWidth(2/3))
@@ -279,7 +280,7 @@ extension MyWineListVC {
 //MARK: - UI
 extension MyWineListVC {
     func setNavigation(){
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 25))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 20))
         imageView.contentMode = .scaleAspectFit
         let image = UIImage(named: "logo_horiz")
         imageView.image = image

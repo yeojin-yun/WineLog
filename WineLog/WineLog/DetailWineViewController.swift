@@ -10,10 +10,10 @@ import UIKit
 
 
 final class DetailWineViewController: UIViewController {
-    let sigleton = Singleton.shared.myWines
+    var singleton = Singleton.shared.myWines
     
     let detailWineView = DetailWineInfoView()
-    lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "wineEdit"), style: .plain, target: self, action: #selector(didTapEditBtn(_:)))
+    
 
 //    var wineModel: WineInformation?
 
@@ -29,10 +29,8 @@ final class DetailWineViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
         print(#function)
         configureUI()
-        
     }
 
     init(wineModel: WineInformation) {
@@ -82,6 +80,22 @@ extension DetailWineViewController: EditDelegate {
         print(#function)
         navigationController?.pushViewController(nextVC, animated: true)
     }
+    
+    @objc func didTapDeleteBtn(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: wineModel.name, message: "이 와인을 삭제할까요?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        let okAction = UIAlertAction(title: "확인", style: .default) { action in
+            let selectedWine = self.singleton.firstIndex(of: self.wineModel) ?? 0
+            print(selectedWine)
+            print(type(of: selectedWine))
+            self.singleton.remove(at: selectedWine)
+            dump(self.singleton)
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        self.present(alert, animated: true)
+    }
 }
 //MARK: -UI
 extension DetailWineViewController {
@@ -93,9 +107,14 @@ extension DetailWineViewController {
     }
     
     private func setNavigationBar() {
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+
+        let editBarButtonItem = UIBarButtonItem(image: UIImage(named: "wineEdit"), style: .done, target: self, action: #selector(didTapEditBtn(_:)))
+        let deleteBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(didTapDeleteBtn(_:)))
+        self.navigationItem.rightBarButtonItems = [editBarButtonItem, deleteBarButtonItem]
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.myGreen
-        self.navigationItem.rightBarButtonItem?.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: -60)
+//        self.navigationItem.rightBarButtonItems?[0].imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: -60)
+//        self.navigationItem.rightBarButtonItems?[1].imageInsets = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
+//        self.navigationItem.rightBarButtonItems[0].inset//UIImage(named: "wineEdit")
     }
     
     private func setAttributes() {
@@ -106,5 +125,12 @@ extension DetailWineViewController {
     
     private func setConstraints() {
         
+    }
+}
+
+
+extension WineInformation: Equatable {
+    static func == (lhs: WineInformation, rhs: WineInformation) -> Bool {
+        return lhs.id == rhs.id && lhs.name == rhs.name
     }
 }
