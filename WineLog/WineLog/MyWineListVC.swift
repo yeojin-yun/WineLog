@@ -35,7 +35,6 @@ class MyWineListVC: UIViewController {
         super.viewWillAppear(animated)
         outputWineList = wineListFilter()  //와인종류순
         self.listCV.reloadData()
-        
     }
 }
 
@@ -117,11 +116,19 @@ extension MyWineListVC: UICollectionViewDelegate {
             }
         } else {
             let detailWineVC = DetailWineViewController(wineModel: outputWineList[indexPath.item])
+            detailWineVC.delegate = self
 //            detailWineVC.wineModel = outputWineList[indexPath.item]
             self.navigationController?.pushViewController(detailWineVC, animated: true)
         }
     }
 }
+extension MyWineListVC: WineRemoveDelegate {
+    func removeWine() {
+        Singleton.shared.loadFromJson()
+        listCV.reloadData()
+    }
+}
+
 //MARK: CollectionView Layout - Compositional
 extension MyWineListVC {
     fileprivate func createCompositionalLayout() -> UICollectionViewLayout {
@@ -280,18 +287,20 @@ extension MyWineListVC {
 //MARK: - UI
 extension MyWineListVC {
     func setNavigation(){
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 20))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 15, height: 10))
         imageView.contentMode = .scaleAspectFit
         let image = UIImage(named: "logo_horiz")
         imageView.image = image
+        imageView.widthAnchor.constraint(equalToConstant: 115).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 95).isActive = true
         navigationItem.titleView = imageView
     }
     func setUI(){
-//        flowLayout1.itemSize = CGSize(width: view.frame.width / 4, height: view.frame.height / 19)
-        flowLayout1.itemSize = CGSize(width: view.frame.width / 4, height: view.frame.height / 20)
+        let cellWidth = (UIScreen.main.bounds.width - 35) / 4
+        flowLayout1.itemSize = CGSize(width: cellWidth, height: view.frame.height / 24)
         flowLayout1.minimumInteritemSpacing = 5  //아이템간의 가로거리
         flowLayout1.minimumLineSpacing = 5 //아이템간의 세로거리
-        flowLayout1.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5) //테두리 거리
+//        flowLayout1.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5) //테두리 거리
         flowLayout1.scrollDirection = .horizontal
         sortCV.showsHorizontalScrollIndicator = false
         
@@ -313,9 +322,9 @@ extension MyWineListVC {
         
         NSLayoutConstraint.activate([
             sortCV.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 3),
-            sortCV.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 3),
-            sortCV.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            sortCV.heightAnchor.constraint(equalToConstant: view.frame.height / 20),
+            sortCV.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            sortCV.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            sortCV.heightAnchor.constraint(equalToConstant: view.frame.height / 24),
             
             listCV.topAnchor.constraint(equalTo: sortCV.bottomAnchor,constant: 5),
             listCV.leadingAnchor.constraint(equalTo: view.leadingAnchor),

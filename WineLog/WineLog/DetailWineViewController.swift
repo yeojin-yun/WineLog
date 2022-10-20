@@ -8,20 +8,19 @@
 
 import UIKit
 
+protocol WineRemoveDelegate: AnyObject {
+    func removeWine()
+}
 
-final class DetailWineViewController: UIViewController {
+
+class DetailWineViewController: UIViewController {
+    weak var delegate: WineRemoveDelegate?
+    
     var singleton = Singleton.shared.myWines
     
     let detailWineView = DetailWineInfoView()
-    
 
-//    var wineModel: WineInformation?
-
-    var wineModel: WineInformation {
-        didSet {
-            
-        }
-    }
+    var wineModel: WineInformation 
     
     override func loadView() {
         super.loadView()
@@ -29,14 +28,14 @@ final class DetailWineViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(#function)
+        print(#function, wineModel.name)
         configureUI()
     }
 
     init(wineModel: WineInformation) {
         self.wineModel = wineModel
         super.init(nibName: nil, bundle: nil)
-        print(#function)
+        print(#function, wineModel.id)
         setData()
     }
     
@@ -48,14 +47,12 @@ final class DetailWineViewController: UIViewController {
 
 extension DetailWineViewController: EditDelegate {
     func getData(_ data: WineInformation) {
-        print(#function, data.totalStar)
         wineModel = data
         setData()
     }
     
     private func setData() {
 //        guard let wineModel = wineModel else { return }
-        print(#function, wineModel.totalStar)
         detailWineView.manufacturingContryLabel.text = wineModel.manufacturingContry
         detailWineView.setTypeLabel(wineModel.type)
         detailWineView.wineImage.image = UIImage(data: wineModel.profileData)
@@ -82,19 +79,53 @@ extension DetailWineViewController: EditDelegate {
     }
     
     @objc func didTapDeleteBtn(_ sender: UIBarButtonItem) {
+        let attributedString = NSMutableAttributedString(string: wineModel.name)
+        let alertFont = UIFont(name: "GowunBatang-Bold", size: 17)
+        attributedString.addAttribute(.font, value: alertFont!, range: (wineModel.name as NSString).range(of: "\(wineModel.name)"))
+
         let alert = UIAlertController(title: wineModel.name, message: "이 와인을 삭제할까요?", preferredStyle: .alert)
+        alert.setValue(attributedString, forKey: "attributedTitle")
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
         let okAction = UIAlertAction(title: "확인", style: .default) { action in
             let selectedWine = self.singleton.firstIndex(of: self.wineModel) ?? 0
-            print(selectedWine)
-            print(type(of: selectedWine))
             self.singleton.remove(at: selectedWine)
-            dump(self.singleton)
+            self.saveToJson(self.singleton)
+            self.delegate?.removeWine()
+            self.navigationController?.popViewController(animated: true)
         }
         
         alert.addAction(cancelAction)
         alert.addAction(okAction)
         self.present(alert, animated: true)
+    }
+    
+    //MARK: FileManager
+    func saveToJson(_ saveData: [WineInformation]){
+        var isDirectory: ObjCBool = true
+        if FileManager.default.fileExists(atPath: Singleton.shared.getFolderPath().path, isDirectory: &isDirectory){ //폴더 존재
+            //덮어쓰기
+            let jsonEncoder = JSONEncoder()
+            do{
+                let encodedData = try jsonEncoder.encode(saveData)
+                do{
+                    try encodedData.write(to: Singleton.shared.getFilePath())
+                    
+                    print("encoded", encodedData)
+                }catch{
+                    print(error.localizedDescription)
+                }
+            }catch{
+                print(error.localizedDescription)
+            }
+        }else{  //폴더 없음
+            do{
+                try FileManager.default.createDirectory(atPath: Singleton.shared.getFolderPath().path, withIntermediateDirectories: false)
+                print("폴더 생성됨")
+                saveToJson(saveData)
+            }catch{
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 //MARK: -UI
@@ -107,14 +138,17 @@ extension DetailWineViewController {
     }
     
     private func setNavigationBar() {
-
-        let editBarButtonItem = UIBarButtonItem(image: UIImage(named: "wineEdit"), style: .done, target: self, action: #selector(didTapEditBtn(_:)))
+        let button = UIButton()
+        button.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        button.setImage(UIImage(named: "wineEdit"), for: .normal)
+        button.addTarget(self, action: #selector(didTapEditBtn(_:)), for: .touchUpInside)
+        let editBarButtonItem = UIBarButtonItem(customView: button)
         let deleteBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(didTapDeleteBtn(_:)))
+        deleteBarButtonItem.tintColor = .myGreen
         self.navigationItem.rightBarButtonItems = [editBarButtonItem, deleteBarButtonItem]
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.myGreen
-//        self.navigationItem.rightBarButtonItems?[0].imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: -60)
-//        self.navigationItem.rightBarButtonItems?[1].imageInsets = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
-//        self.navigationItem.rightBarButtonItems[0].inset//UIImage(named: "wineEdit")
+
+
     }
     
     private func setAttributes() {

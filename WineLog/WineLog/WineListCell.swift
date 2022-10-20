@@ -43,10 +43,10 @@ extension WineListCell {
         imageView.backgroundColor = .myGreen?.withAlphaComponent(0.4)
         imageView.layer.cornerRadius = 10
 
-        nameLabel.font = .boldSystemFont(ofSize: 17)
+        nameLabel.font = UIFont(name: "GowunBatang-Bold", size: 17)
 
         imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 13
+        imageView.layer.cornerRadius = 8
         
         [priceLabel, scoreLabel].forEach {
 //            $0.adjustsFontSizeToFitWidth = true

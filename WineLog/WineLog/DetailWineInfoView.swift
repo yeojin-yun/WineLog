@@ -55,6 +55,8 @@ class DetailWineInfoView: UIView {
         
         wineImage.image = UIImage(named: "wine_example")
         wineImage.contentMode = .scaleAspectFit
+        wineImage.layer.cornerRadius = 10
+        wineImage.layer.masksToBounds = true
         wineImage.clipsToBounds = true
         
         [wineNameLabel].forEach {
