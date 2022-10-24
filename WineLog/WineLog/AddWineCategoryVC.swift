@@ -20,6 +20,7 @@ class AddWineCategoryVC: UIViewController {
         super.viewDidLoad()
         configureUI()
         Singleton.shared.loadFromJson()
+        openIntro()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -50,7 +51,18 @@ extension AddWineCategoryVC{
     }
     
     @objc func buttonPressed(_ sender: UIBarButtonItem){
-        present(IntroduceVC(), animated: true)
+//        present(IntroduceVC(), animated: true)
+        present(FirstIntroVC(), animated: true)
+    }
+    
+    func openIntro(){
+        var isOpen = false
+        if UserDefaults.standard.bool(forKey: "firstIntro") != nil{
+            isOpen = UserDefaults.standard.bool(forKey: "firstIntro")
+        }
+        if !isOpen{
+            present(FirstIntroVC(), animated: true)
+        }
     }
 }
 

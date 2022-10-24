@@ -208,9 +208,9 @@ extension EditWineInfomationVC{
                     case 1:
                         self.bottomConstraint.constant = commentPosition.y + commentHeight - keyboardHeight
                     case 2:
-                        self.bottomConstraint.constant = commentPosition.y + commentHeight - keyboardHeight - 45
+                        self.bottomConstraint.constant = commentPosition.y + commentHeight - keyboardHeight - 55
                     case 3:
-                        self.bottomConstraint.constant = commentPosition.y - keyboardHeight - 10
+                        self.bottomConstraint.constant = commentPosition.y - keyboardHeight - 20
                     default:
                         print("Wrong Selected TextField")
                     }
@@ -388,7 +388,11 @@ extension EditWineInfomationVC{
             $0.layer.cornerRadius = 10
         }
         [nameField].forEach{
-            $0.font = .boldSystemFont(ofSize: 23)
+            if view.frame.height > 700{
+                $0.font = .boldSystemFont(ofSize: 23)
+            }else{
+                $0.font = .boldSystemFont(ofSize: 18)
+            }
             $0.textAlignment = .center
             $0.placeholder = "제품명"
             $0.delegate = self
@@ -542,12 +546,14 @@ extension EditWineInfomationVC{
             firstBackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
             firstBackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
             firstBackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
-            firstBackView.heightAnchor.constraint(equalToConstant: 370),
+//            firstBackView.heightAnchor.constraint(equalToConstant: 370),
+            firstBackView.heightAnchor.constraint(equalTo:contentView.heightAnchor, multiplier: 0.55),
             
             secondBackView.topAnchor.constraint(equalTo: firstBackView.bottomAnchor, constant: 20),
             secondBackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             secondBackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            secondBackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
+            secondBackView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -20),
+            secondBackView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.35)
         ])
     }
     
@@ -560,7 +566,8 @@ extension EditWineInfomationVC{
         NSLayoutConstraint.activate([
             photoView.topAnchor.constraint(equalTo: firstBackView.topAnchor, constant: 30),
             photoView.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
-            photoView.heightAnchor.constraint(equalToConstant: 200),
+//            photoView.heightAnchor.constraint(equalToConstant: 200),
+            photoView.heightAnchor.constraint(equalTo: firstBackView.heightAnchor, multiplier: 0.5),
             photoView.widthAnchor.constraint(equalTo: photoView.heightAnchor),
             
             addPhotoBtn.topAnchor.constraint(equalTo: photoView.topAnchor),

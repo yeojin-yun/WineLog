@@ -23,6 +23,7 @@
 		B654562B28F15AA300961619 /* EditWineInfomationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654562A28F15AA300961619 /* EditWineInfomationVC.swift */; };
 		B67E7BF22906C437009EEFBE /* IntroduceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67E7BF12906C437009EEFBE /* IntroduceVC.swift */; };
 		B67E7BF42906C68A009EEFBE /* CustomTapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67E7BF32906C68A009EEFBE /* CustomTapGesture.swift */; };
+		B67E7BF62906E5BA009EEFBE /* FirstIntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67E7BF52906E5BA009EEFBE /* FirstIntroVC.swift */; };
 		B6857C4028F488A200696101 /* Extension_UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6857C3F28F488A200696101 /* Extension_UIButton.swift */; };
 		B6C1694428EAC20300BE77F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1694328EAC20300BE77F8 /* AppDelegate.swift */; };
 		B6C1694828EAC20300BE77F8 /* MyWineListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1694728EAC20300BE77F8 /* MyWineListVC.swift */; };
@@ -50,6 +51,7 @@
 		B654562A28F15AA300961619 /* EditWineInfomationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineInfomationVC.swift; sourceTree = "<group>"; };
 		B67E7BF12906C437009EEFBE /* IntroduceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroduceVC.swift; sourceTree = "<group>"; };
 		B67E7BF32906C68A009EEFBE /* CustomTapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTapGesture.swift; sourceTree = "<group>"; };
+		B67E7BF52906E5BA009EEFBE /* FirstIntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstIntroVC.swift; sourceTree = "<group>"; };
 		B6857C3F28F488A200696101 /* Extension_UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UIButton.swift; sourceTree = "<group>"; };
 		B6C1694028EAC20300BE77F8 /* WineLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WineLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6C1694328EAC20300BE77F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			children = (
 				B6C1695728EAC50900BE77F8 /* AddWineCategoryVC.swift */,
 				B67E7BF12906C437009EEFBE /* IntroduceVC.swift */,
+				B67E7BF52906E5BA009EEFBE /* FirstIntroVC.swift */,
 			);
 			name = AddWineCategoryVC;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				B6C1695C28EAC64500BE77F8 /* Singleton.swift in Sources */,
 				B635B95528EE1D7100622056 /* ETInt.swift in Sources */,
 				B6C1694828EAC20300BE77F8 /* MyWineListVC.swift in Sources */,
+				B67E7BF62906E5BA009EEFBE /* FirstIntroVC.swift in Sources */,
 				B67E7BF42906C68A009EEFBE /* CustomTapGesture.swift in Sources */,
 				B654561528F0BAE500961619 /* DetailWineViewController.swift in Sources */,
 				B6DB776128ECA6EE00777CB8 /* AddWineInformationVC.swift in Sources */,
