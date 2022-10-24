@@ -11,7 +11,11 @@ class Singleton{
     static let shared: Singleton = Singleton()
     private init(){}
     
-    var myWines = [WineInformation]()
+    var myWines = [WineInformation]() {
+        didSet {
+            print("와인 변경")
+        }
+    }
     
     
     //FileManager

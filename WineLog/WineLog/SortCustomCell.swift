@@ -29,11 +29,11 @@ extension SortCustomCell {
         label.text = "test"
 
         layer.masksToBounds = true
-        layer.cornerRadius = 20
+        layer.cornerRadius = 15
         layer.borderColor =  #colorLiteral(red: 0.7447593808, green: 0.8098963499, blue: 0.7396327853, alpha: 1)
         layer.borderWidth = 2
         label.textColor = .myGreen
-        label.font = .boldSystemFont(ofSize: 15)
+        label.font = .boldSystemFont(ofSize: 13)
        
         contentView.addSubview((label))
         label.translatesAutoresizingMaskIntoConstraints = false

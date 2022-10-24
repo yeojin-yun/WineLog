@@ -62,6 +62,8 @@ extension AddWineCategoryVC{
         let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 25))
         logoView.contentMode = .scaleAspectFit
         logoView.image = UIImage(named: "logo_horiz")
+        logoView.widthAnchor.constraint(equalToConstant: 115).isActive = true
+        logoView.heightAnchor.constraint(equalToConstant: 95).isActive = true
         navigationItem.titleView = logoView
     }
     
