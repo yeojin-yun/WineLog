@@ -21,6 +21,8 @@
 		B654562728F0C25000961619 /* SortCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654562628F0C25000961619 /* SortCustomCell.swift */; };
 		B654562928F0C26500961619 /* WineListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654562828F0C26500961619 /* WineListCell.swift */; };
 		B654562B28F15AA300961619 /* EditWineInfomationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654562A28F15AA300961619 /* EditWineInfomationVC.swift */; };
+		B67E7BF22906C437009EEFBE /* IntroduceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67E7BF12906C437009EEFBE /* IntroduceVC.swift */; };
+		B67E7BF42906C68A009EEFBE /* CustomTapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67E7BF32906C68A009EEFBE /* CustomTapGesture.swift */; };
 		B6857C4028F488A200696101 /* Extension_UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6857C3F28F488A200696101 /* Extension_UIButton.swift */; };
 		B6C1694428EAC20300BE77F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1694328EAC20300BE77F8 /* AppDelegate.swift */; };
 		B6C1694828EAC20300BE77F8 /* MyWineListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1694728EAC20300BE77F8 /* MyWineListVC.swift */; };
@@ -46,6 +48,8 @@
 		B654562628F0C25000961619 /* SortCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCustomCell.swift; sourceTree = "<group>"; };
 		B654562828F0C26500961619 /* WineListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineListCell.swift; sourceTree = "<group>"; };
 		B654562A28F15AA300961619 /* EditWineInfomationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineInfomationVC.swift; sourceTree = "<group>"; };
+		B67E7BF12906C437009EEFBE /* IntroduceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroduceVC.swift; sourceTree = "<group>"; };
+		B67E7BF32906C68A009EEFBE /* CustomTapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTapGesture.swift; sourceTree = "<group>"; };
 		B6857C3F28F488A200696101 /* Extension_UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UIButton.swift; sourceTree = "<group>"; };
 		B6C1694028EAC20300BE77F8 /* WineLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WineLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6C1694328EAC20300BE77F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +87,7 @@
 				B635B95428EE1D7100622056 /* ETInt.swift */,
 				B654561028F0B49F00961619 /* UIColor_Extension.swift */,
 				B6857C3F28F488A200696101 /* Extension_UIButton.swift */,
+				B67E7BF32906C68A009EEFBE /* CustomTapGesture.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -191,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				B6C1695728EAC50900BE77F8 /* AddWineCategoryVC.swift */,
+				B67E7BF12906C437009EEFBE /* IntroduceVC.swift */,
 			);
 			name = AddWineCategoryVC;
 			sourceTree = "<group>";
@@ -278,6 +284,7 @@
 			files = (
 				B6C1695828EAC50900BE77F8 /* AddWineCategoryVC.swift in Sources */,
 				B654561D28F0BB2100961619 /* CustomLabel.swift in Sources */,
+				B67E7BF22906C437009EEFBE /* IntroduceVC.swift in Sources */,
 				B654562728F0C25000961619 /* SortCustomCell.swift in Sources */,
 				B654561928F0BB0400961619 /* DetailWineInfoView.swift in Sources */,
 				B6857C4028F488A200696101 /* Extension_UIButton.swift in Sources */,
@@ -285,6 +292,7 @@
 				B6C1695C28EAC64500BE77F8 /* Singleton.swift in Sources */,
 				B635B95528EE1D7100622056 /* ETInt.swift in Sources */,
 				B6C1694828EAC20300BE77F8 /* MyWineListVC.swift in Sources */,
+				B67E7BF42906C68A009EEFBE /* CustomTapGesture.swift in Sources */,
 				B654561528F0BAE500961619 /* DetailWineViewController.swift in Sources */,
 				B6DB776128ECA6EE00777CB8 /* AddWineInformationVC.swift in Sources */,
 				B654561728F0BAF700961619 /* DetailWineView.swift in Sources */,

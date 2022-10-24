@@ -43,4 +43,31 @@ class Singleton{
             print(error.localizedDescription)
         }
     }
+    //FileManager - Save
+    func saveToJson(_ saveData: [WineInformation]){
+        var isDirectory: ObjCBool = true
+        if FileManager.default.fileExists(atPath: Singleton.shared.getFolderPath().path, isDirectory: &isDirectory){ //폴더 존재
+            //덮어쓰기
+            let jsonEncoder = JSONEncoder()
+            do{
+                let encodedData = try jsonEncoder.encode(saveData)
+                do{
+                    try encodedData.write(to: Singleton.shared.getFilePath())
+                    print("encoded")
+                }catch{
+                    print(error.localizedDescription)
+                }
+            }catch{
+                print(error.localizedDescription)
+            }
+        }else{  //폴더 없음
+            do{
+                try FileManager.default.createDirectory(atPath: Singleton.shared.getFolderPath().path, withIntermediateDirectories: false)
+                print("폴더 생성됨")
+                saveToJson(saveData)
+            }catch{
+                print(error.localizedDescription)
+            }
+        }
+    }
 }

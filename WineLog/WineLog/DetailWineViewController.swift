@@ -86,7 +86,7 @@ extension DetailWineViewController: EditDelegate {
         let alert = UIAlertController(title: wineModel.name, message: "이 와인을 삭제할까요?", preferredStyle: .alert)
         alert.setValue(attributedString, forKey: "attributedTitle")
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
-        let okAction = UIAlertAction(title: "확인", style: .default) { action in
+        let okAction = UIAlertAction(title: "확인", style: .destructive) { action in
             let selectedWine = self.singleton.firstIndex(of: self.wineModel) ?? 0
             self.singleton.remove(at: selectedWine)
             self.saveToJson(self.singleton)

@@ -19,6 +19,7 @@ class EditWineInfomationVC: UIViewController {
     var isAddWine: Bool!  //추가모드: true / 편집모드: false
     var wineId: Int?  //편집모드 시 ID로 받기
     var isNewPhoto = false
+    var fieldLocation = 0  //0: else / 1: drinkdate, place / 2: price / 3: comment
     var bottomConstraint: NSLayoutConstraint!
     
     var totalStarArr = [UIImageView]()
@@ -92,16 +93,14 @@ class EditWineInfomationVC: UIViewController {
             commentField.text = "한줄평을 작성해 주세요."
             commentField.textColor = UIColor.lightGray
         }
-        starAction(totalSlider, totalStarArr)
-        starAction(sugarSlider, sugarStarArr)
-        starAction(acidSlider, acidStarArr)
-        starAction(bodySlider, bodyStarArr)
+        loadStarArr()
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-//    deinit{
-//        NotificationCenter.default.removeObserver(self)
-//    }
+    deinit{
+        NotificationCenter.default.removeObserver(self)
+    }
 
     private func configureUI(){
         setNavigation()
@@ -179,13 +178,54 @@ extension EditWineInfomationVC{
             print("Not Exist Slider Error")
         }
     }
-//    @objc func keyboardWillShow(_ sender: Notification){
-//        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
-//            let keyboardRectangle = keyboardFrame.cgRectValue
-//            let keyboardHeight = keyboardRectangle.height
-//            print(keyboardHeight)
-//        }
-//    }
+    @objc func sliderTapped(_ sender: CustomTapGesture){
+        guard let slider = sender.slider else{return}
+        var pointTapped = CGPoint()
+        if sender.isInFirst{
+            pointTapped = sender.location(in: self.secondBackView)
+        }else{
+            pointTapped = sender.location(in: self.firstBackView)
+        }
+        let positionOfSlider: CGPoint = slider.frame.origin
+        let widthOfSlider: CGFloat = slider.frame.size.width
+        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(slider.maximumValue) / widthOfSlider)
+        slider.setValue(Float(newValue), animated: true)
+        loadStarArr()
+    }
+    
+    @objc func keyboardWillShow(_ sender: Notification){
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            let commentHeight = commentBackView.frame.height
+            let commentPosition = commentBackView.frame.origin
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1){
+                UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+                    switch self.fieldLocation{
+                    case 0:
+                        self.bottomConstraint.constant = 0
+                    case 1:
+                        self.bottomConstraint.constant = commentPosition.y + commentHeight - keyboardHeight
+                    case 2:
+                        self.bottomConstraint.constant = commentPosition.y + commentHeight - keyboardHeight - 45
+                    case 3:
+                        self.bottomConstraint.constant = commentPosition.y - keyboardHeight - 10
+                    default:
+                        print("Wrong Selected TextField")
+                    }
+                    self.view.layoutIfNeeded()
+                }, completion: nil)
+            }
+        }
+    }
+    @objc func keyboardWillHide(_ sender: Notification){
+        fieldLocation = 0
+        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+            self.bottomConstraint.constant = 0
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
 }
 
 //MARK: Function
@@ -200,6 +240,13 @@ extension EditWineInfomationVC{
                 stackSubView[i].image = UIImage(named: "star_empty")
             }
         }
+    }
+    
+    func loadStarArr(){
+        starAction(totalSlider, totalStarArr)
+        starAction(sugarSlider, sugarStarArr)
+        starAction(acidSlider, acidStarArr)
+        starAction(bodySlider, bodyStarArr)
     }
     
     private func loadInformation(){
@@ -230,33 +277,7 @@ extension EditWineInfomationVC{
         acidSlider.value = Float(loadWine.acidityStar)
         bodySlider.value = Float(loadWine.bodyStar)
     }
-    //MARK: FileManager
-    func saveToJson(_ saveData: [WineInformation]){
-        var isDirectory: ObjCBool = true
-        if FileManager.default.fileExists(atPath: Singleton.shared.getFolderPath().path, isDirectory: &isDirectory){ //폴더 존재
-            //덮어쓰기
-            let jsonEncoder = JSONEncoder()
-            do{
-                let encodedData = try jsonEncoder.encode(saveData)
-                do{
-                    try encodedData.write(to: Singleton.shared.getFilePath())
-                    print("encoded")
-                }catch{
-                    print(error.localizedDescription)
-                }
-            }catch{
-                print(error.localizedDescription)
-            }
-        }else{  //폴더 없음
-            do{
-                try FileManager.default.createDirectory(atPath: Singleton.shared.getFolderPath().path, withIntermediateDirectories: false)
-                print("폴더 생성됨")
-                saveToJson(saveData)
-            }catch{
-                print(error.localizedDescription)
-            }
-        }
-    }
+
     func saveData(){
         if isAddWine{ //find id
             if Singleton.shared.myWines.count > 0{
@@ -299,7 +320,7 @@ extension EditWineInfomationVC{
         delegate?.getData(newWineInfo)
         //FileManager Save
         print(#function, newWineInfo.totalStar)
-        saveToJson(Singleton.shared.myWines)
+        Singleton.shared.saveToJson(Singleton.shared.myWines)
     }
 }
 
@@ -343,9 +364,7 @@ extension EditWineInfomationVC{
     private func setNavigation(){
         let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 25))
         logoView.contentMode = .scaleAspectFit
-        logoView.image = UIImage(named: "logo_horiz")
-        logoView.widthAnchor.constraint(equalToConstant: 115).isActive = true
-        logoView.heightAnchor.constraint(equalToConstant: 95).isActive = true
+        logoView.image = UIImage(named: "titleLogo4")
         navigationItem.titleView = logoView
         
         saveItem.title = "저장"
@@ -372,6 +391,7 @@ extension EditWineInfomationVC{
             $0.font = .boldSystemFont(ofSize: 23)
             $0.textAlignment = .center
             $0.placeholder = "제품명"
+            $0.delegate = self
         }
         [wineTypeLabel].forEach {
             $0.font = .boldSystemFont(ofSize: 14)
@@ -400,12 +420,14 @@ extension EditWineInfomationVC{
             $0.textColor = .gray
             $0.placeholder = "제조국"
             $0.textAlignment = .right
+            $0.delegate = self
         }
         [madeDateField].forEach{
             $0.font = .systemFont(ofSize: 14)
             $0.textColor = .gray
             $0.placeholder = "제조일"
             $0.textAlignment = .left
+            $0.delegate = self
         }
         [totalSlider].forEach{
             $0.maximumValue = 5.0
@@ -415,6 +437,10 @@ extension EditWineInfomationVC{
             $0.tintColor = .clear
             $0.alpha = 0.1
             $0.addTarget(self, action: #selector(didChangeSlider(_:)), for: .valueChanged)
+            let tapGesture = CustomTapGesture()
+            tapGesture.addTarget(self, action: #selector(sliderTapped(_:)))
+            tapGesture.slider = $0
+            $0.addGestureRecognizer(tapGesture)
         }
         [totalStack].forEach{
             $0.axis = .horizontal
@@ -444,16 +470,17 @@ extension EditWineInfomationVC{
         sugarLabel.text = "당도"
         acidLabel.text = "산도"
         bodyLabel.text = "바디감"
-        priceField.keyboardType = .numberPad
         
         [drinkDateField, placeField, priceField].forEach{
             $0.font = .boldSystemFont(ofSize: 16)
             $0.textAlignment = .left
             $0.textColor = .darkGray
+            $0.placeholder = "(선택)"
         }
-        drinkDateField.placeholder = "(선택)"
-        placeField.placeholder = "(선택)"
-        priceField.placeholder = "(선택)"
+        priceField.keyboardType = .numberPad
+//        drinkDateField.placeholder = "(선택)"
+//        placeField.placeholder = "(선택)"
+//        priceField.placeholder = "(선택)"
         
         [sugarSlider, acidSlider, bodySlider].forEach{
             $0.maximumValue = 5.0
@@ -463,6 +490,10 @@ extension EditWineInfomationVC{
             $0.tintColor = .clear
             $0.alpha = 0.1
             $0.addTarget(self, action: #selector(didChangeSlider(_:)), for: .valueChanged)
+            let tapGesture = CustomTapGesture(target: self, action: #selector(sliderTapped(_:)))
+            tapGesture.slider = $0
+            tapGesture.isInFirst = true
+            $0.addGestureRecognizer(tapGesture)
         }
         [sugarStack, acidStack, bodyStack].forEach{
             $0.axis = .horizontal
@@ -557,10 +588,10 @@ extension EditWineInfomationVC{
             totalStack.heightAnchor.constraint(equalToConstant: 30),
             totalStack.widthAnchor.constraint(equalTo: totalStack.heightAnchor, multiplier: 6.0),
             
-            totalSlider.topAnchor.constraint(equalTo: totalStack.topAnchor),
-            totalSlider.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
+            totalSlider.centerYAnchor.constraint(equalTo: totalStack.centerYAnchor),
+            totalSlider.leadingAnchor.constraint(equalTo: totalStack.leadingAnchor, constant: -10),
+            totalSlider.trailingAnchor.constraint(equalTo: totalStack.trailingAnchor, constant: 0),
             totalSlider.heightAnchor.constraint(equalTo: totalStack.heightAnchor),
-            totalSlider.widthAnchor.constraint(equalTo: totalStack.widthAnchor),
             
         ])
     }
@@ -618,15 +649,15 @@ extension EditWineInfomationVC{
             
             sugarSlider.topAnchor.constraint(equalTo: sugarStack.topAnchor),
             sugarSlider.bottomAnchor.constraint(equalTo: sugarStack.bottomAnchor),
-            sugarSlider.leadingAnchor.constraint(equalTo: sugarStack.leadingAnchor),
+            sugarSlider.leadingAnchor.constraint(equalTo: sugarStack.leadingAnchor, constant: -7.5),
             sugarSlider.trailingAnchor.constraint(equalTo: sugarStack.trailingAnchor),
             acidSlider.topAnchor.constraint(equalTo: acidStack.topAnchor),
             acidSlider.bottomAnchor.constraint(equalTo: acidStack.bottomAnchor),
-            acidSlider.leadingAnchor.constraint(equalTo: acidStack.leadingAnchor),
+            acidSlider.leadingAnchor.constraint(equalTo: acidStack.leadingAnchor, constant: -7.5),
             acidSlider.trailingAnchor.constraint(equalTo: acidStack.trailingAnchor),
             bodySlider.topAnchor.constraint(equalTo: bodyStack.topAnchor),
             bodySlider.bottomAnchor.constraint(equalTo: bodyStack.bottomAnchor),
-            bodySlider.leadingAnchor.constraint(equalTo: bodyStack.leadingAnchor),
+            bodySlider.leadingAnchor.constraint(equalTo: bodyStack.leadingAnchor, constant: -7.5),
             bodySlider.trailingAnchor.constraint(equalTo: bodyStack.trailingAnchor),
             
             commentBackView.topAnchor.constraint(equalTo: firstLabelStack.bottomAnchor, constant: 30),
@@ -656,7 +687,7 @@ extension EditWineInfomationVC: UITextFieldDelegate{
                         textField.text = formattedString
                         return false
                     }
-                }else{ // 숫자가 아닐 때먽
+                }else{ // 숫자가 아닐 때
                     if string == "" { // 백스페이스일때
                         let lastIndex = beforeForemattedString.index(beforeForemattedString.endIndex, offsetBy: -1)
                         beforeForemattedString = String(beforeForemattedString[..<lastIndex])
@@ -673,18 +704,35 @@ extension EditWineInfomationVC: UITextFieldDelegate{
         }else{return true}
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        let secondHeight = secondBackView.frame.height
-        let commentHeight = commentBackView.frame.height
-        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-            self.bottomConstraint.constant = commentHeight - secondHeight
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+        switch textField{
+        case drinkDateField, placeField:
+            fieldLocation = 1
+        case priceField:
+            fieldLocation = 2
+        default:
+            fieldLocation = 0
+        }
     }
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-            self.bottomConstraint.constant = 0
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField{
+        case madeContryField:
+            madeDateField.becomeFirstResponder()
+        case madeDateField:
+            nameField.becomeFirstResponder()
+        case nameField:
+            drinkDateField.becomeFirstResponder()
+        case drinkDateField:
+            placeField.becomeFirstResponder()
+        case placeField:
+            priceField.becomeFirstResponder()
+        case priceField:
+            commentField.becomeFirstResponder()
+        default:
+            print("Not Exist TextField")
+            return false
+        }
+        return true
     }
 }
 //MARK: UITextViewDelegate
@@ -694,20 +742,12 @@ extension EditWineInfomationVC: UITextViewDelegate{
             textView.text = nil
             textView.textColor = UIColor.black
         }
-        let secondHeight = secondBackView.frame.height
-        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-            self.bottomConstraint.constant = -secondHeight
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+        fieldLocation = 3
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty{
             commentField.text = "한줄평을 작성해 주세요."
             commentField.textColor = UIColor.lightGray
         }
-        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-            self.bottomConstraint.constant = 0
-            self.view.layoutIfNeeded()
-        }, completion: nil)
     }
 }

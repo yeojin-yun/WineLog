@@ -20,8 +20,12 @@ class MyWineListVC: UIViewController {
     let flowLayout1 = UICollectionViewFlowLayout()
     lazy var sortCV = UICollectionView(frame: .zero, collectionViewLayout: flowLayout1)
     lazy var listCV = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
-    var sortedWineList = [WineInformation]()
     var outputWineList = [WineInformation]()
+    
+    var selectMode = false
+    var selectedList = [Int]()
+    let trashModeItem = UIBarButtonItem()
+    let removeActionItem = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +73,14 @@ extension MyWineListVC: UICollectionViewDataSource {
             }
             cell.scoreLabel.text = "별점: \(String(format: "%.1f", Double(outputWineList[indexPath.item].totalStar)))"
             
+            cell.layer.cornerRadius = 10
+            if !selectMode{
+                cell.layer.borderWidth = 0
+                cell.layer.borderColor = UIColor.clear.cgColor
+//                cell.backgroundColor = .clear
+                cell.alpha = 1
+            }
+            
             return cell
         }else{
             guard let cell = sortCV.dequeueReusableCell(withReuseIdentifier: SortCustomCell.identifier, for: indexPath) as? SortCustomCell else { fatalError() }
@@ -115,10 +127,30 @@ extension MyWineListVC: UICollectionViewDelegate {
                 fatalError()
             }
         } else {
-            let detailWineVC = DetailWineViewController(wineModel: outputWineList[indexPath.item])
-            detailWineVC.delegate = self
-//            detailWineVC.wineModel = outputWineList[indexPath.item]
-            self.navigationController?.pushViewController(detailWineVC, animated: true)
+            if selectMode{ //select Mode
+                let cell = collectionView.cellForItem(at: indexPath) as? WineListCell
+                
+                if selectedList.contains(outputWineList[indexPath.item].id){
+                    cell?.alpha = 1
+//                    cell?.backgroundColor = .clear
+                    cell?.layer.borderWidth = 0
+                    cell?.layer.borderColor = UIColor.clear.cgColor
+                    selectedList.remove(at: selectedList.firstIndex(where: {$0 == outputWineList[indexPath.item].id})!)
+                }else{
+//                    cell?.backgroundColor = .myGreen?.withAlphaComponent(0.5)
+                    cell?.alpha = 0.7
+                    cell?.layer.borderWidth = 2
+                    cell?.layer.borderColor = UIColor.myGreen?.cgColor
+//                    cell?.layer.borderColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)
+                    selectedList.append(outputWineList[indexPath.item].id)
+                }
+                
+                removeActionItem.isEnabled = selectedList.count > 0 ? true : false
+            }else{
+                let detailWineVC = DetailWineViewController(wineModel: outputWineList[indexPath.item])
+                //            detailWineVC.wineModel = outputWineList[indexPath.item]
+                self.navigationController?.pushViewController(detailWineVC, animated: true)
+            }
         }
     }
 }
@@ -209,6 +241,45 @@ extension MyWineListVC {
         }
         return result
     }
+    
+    @objc func didTapTrashMode(_ sender: UIBarButtonItem){
+        if selectMode{  //Tap 취소
+            trashModeItem.image = UIImage(systemName: "trash")
+            trashModeItem.title = nil
+            navigationItem.rightBarButtonItems = [trashModeItem]
+            selectMode = false
+            selectedList.removeAll()
+            listCV.reloadData()
+        }else{  //Tap TrashMode
+            trashModeItem.image = nil
+            trashModeItem.title = "취소"
+            removeActionItem.isEnabled = false
+            navigationItem.rightBarButtonItems = [trashModeItem, removeActionItem]
+            selectMode = true
+        }
+    }
+    
+    @objc func didTapTrash(_ sender: UIBarButtonItem){
+        print(#function)  //삭제 명령
+        let warnRemove = UIAlertController(title: "경고", message: "선택한 와인을 목록에서 제거합니다.", preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: "삭제", style: .destructive){_ in
+            let beforeWines = Singleton.shared.myWines
+            Singleton.shared.myWines = beforeWines.filter{ !self.selectedList.contains($0.id) }
+            Singleton.shared.saveToJson(Singleton.shared.myWines)
+            self.outputWineList = self.wineListFilter()
+            
+            self.trashModeItem.image = UIImage(systemName: "trash")
+            self.trashModeItem.title = nil
+            self.navigationItem.rightBarButtonItems = [self.trashModeItem]
+            self.selectMode = false
+            self.selectedList.removeAll()
+            self.listCV.reloadData()
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        warnRemove.addAction(deleteAction)
+        warnRemove.addAction(cancelAction)
+        present(warnRemove, animated: true)
+    }
 }
 
 //MARK: Alert
@@ -287,13 +358,25 @@ extension MyWineListVC {
 //MARK: - UI
 extension MyWineListVC {
     func setNavigation(){
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 15, height: 10))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 25))
         imageView.contentMode = .scaleAspectFit
-        let image = UIImage(named: "logo_horiz")
+        let image = UIImage(named: "titleLogo4")
         imageView.image = image
-        imageView.widthAnchor.constraint(equalToConstant: 115).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 95).isActive = true
         navigationItem.titleView = imageView
+        
+        [trashModeItem].forEach{
+            $0.image = UIImage(systemName: "trash")
+            $0.target = self
+            $0.action = #selector(didTapTrashMode(_:))
+            $0.tintColor = .myGreen
+        }
+        [removeActionItem].forEach{
+            $0.image = UIImage(systemName: "trash")
+            $0.target = self
+            $0.action = #selector(didTapTrash(_:))
+            $0.tintColor = .myGreen
+        }
+        navigationItem.rightBarButtonItems = [trashModeItem]
     }
     func setUI(){
         let cellWidth = (UIScreen.main.bounds.width - 35) / 4

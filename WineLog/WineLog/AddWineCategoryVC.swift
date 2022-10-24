@@ -48,6 +48,10 @@ extension AddWineCategoryVC{
         nextVC.isAddWine = true
         navigationController?.pushViewController(nextVC, animated: true)
     }
+    
+    @objc func buttonPressed(_ sender: UIBarButtonItem){
+        present(IntroduceVC(), animated: true)
+    }
 }
 
 //MARK: -UI
@@ -61,10 +65,16 @@ extension AddWineCategoryVC{
     private func setNavigation(){
         let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 25))
         logoView.contentMode = .scaleAspectFit
-        logoView.image = UIImage(named: "logo_horiz")
-        logoView.widthAnchor.constraint(equalToConstant: 115).isActive = true
-        logoView.heightAnchor.constraint(equalToConstant: 95).isActive = true
+        logoView.image = UIImage(named: "titleLogo4")
         navigationItem.titleView = logoView
+                       
+        self.navigationController?.navigationBar.tintColor = .myGreen
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "info.circle"),
+            style: .plain,
+            target: self,
+            action: #selector(buttonPressed(_:)))
+        navigationItem.rightBarButtonItem?.tintColor = .myGreen
     }
     
     private func setAttributes() {
