@@ -358,10 +358,16 @@ extension MyWineListVC {
 //MARK: - UI
 extension MyWineListVC {
     func setNavigation(){
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 25))
+        let titleView = UIView()
+        let imageView = UIImageView(image: UIImage(named: "titleLogo4"))
         imageView.contentMode = .scaleAspectFit
-        let image = UIImage(named: "titleLogo4")
-        imageView.image = image
+        titleView.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 120),
+            imageView.heightAnchor.constraint(equalToConstant: 80),
+        ])
         navigationItem.titleView = imageView
         
         [trashModeItem].forEach{

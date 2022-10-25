@@ -114,16 +114,14 @@ class DetailWineInfoView: UIView {
                 totalStarLabel.centerXAnchor.constraint(equalTo: wineNameLabel.centerXAnchor, constant: -100),
                 
                 wineImage.leadingAnchor.constraint(equalTo: firstBackView.leadingAnchor, constant: 30),
-                wineImage.topAnchor.constraint(equalTo: firstBackView.topAnchor, constant: 30),
+                wineImage.topAnchor.constraint(equalTo: firstBackView.topAnchor, constant: 20),
                 wineImage.trailingAnchor.constraint(equalTo: firstBackView.trailingAnchor, constant: -30),
                 wineImage.heightAnchor.constraint(equalToConstant: 200),
                 
-                labelStackView.topAnchor.constraint(equalTo: wineImage.bottomAnchor, constant: 10),
+                labelStackView.topAnchor.constraint(equalTo: wineImage.bottomAnchor, constant: 15),
                 labelStackView.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
                 wineNameLabel.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 10),
-                wineNameLabel.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
-                
-                
+                wineNameLabel.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),          
             ])
         } else {
             NSLayoutConstraint.activate([
