@@ -102,27 +102,53 @@ class DetailWineInfoView: UIView {
         firstBackView.translatesAutoresizingMaskIntoConstraints = false
         
         totalStarLabel.titleLabel.text = ""
-        NSLayoutConstraint.activate([
-            firstBackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            firstBackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            firstBackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            firstBackView.heightAnchor.constraint(equalToConstant: 370),
-            
-            totalStarLabel.topAnchor.constraint(equalTo: wineNameLabel.bottomAnchor, constant: 20),
-            totalStarLabel.centerXAnchor.constraint(equalTo: wineNameLabel.centerXAnchor, constant: -100),
-            
-            wineImage.leadingAnchor.constraint(equalTo: firstBackView.leadingAnchor, constant: 30),
-            wineImage.topAnchor.constraint(equalTo: firstBackView.topAnchor, constant: 30),
-            wineImage.trailingAnchor.constraint(equalTo: firstBackView.trailingAnchor, constant: -30),
-            wineImage.heightAnchor.constraint(equalToConstant: 200),
-            
-            labelStackView.topAnchor.constraint(equalTo: wineImage.bottomAnchor, constant: 30),
-            labelStackView.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
-            wineNameLabel.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 10),
-            wineNameLabel.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
-            
-            
-        ])
+        
+        if UIScreen.main.bounds.height < 700 {
+            NSLayoutConstraint.activate([
+                firstBackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
+                firstBackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+                firstBackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+                firstBackView.heightAnchor.constraint(equalToConstant: 330),
+                
+                totalStarLabel.topAnchor.constraint(equalTo: wineNameLabel.bottomAnchor, constant: 10),
+                totalStarLabel.centerXAnchor.constraint(equalTo: wineNameLabel.centerXAnchor, constant: -100),
+                
+                wineImage.leadingAnchor.constraint(equalTo: firstBackView.leadingAnchor, constant: 30),
+                wineImage.topAnchor.constraint(equalTo: firstBackView.topAnchor, constant: 30),
+                wineImage.trailingAnchor.constraint(equalTo: firstBackView.trailingAnchor, constant: -30),
+                wineImage.heightAnchor.constraint(equalToConstant: 200),
+                
+                labelStackView.topAnchor.constraint(equalTo: wineImage.bottomAnchor, constant: 10),
+                labelStackView.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
+                wineNameLabel.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 10),
+                wineNameLabel.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
+                
+                
+            ])
+        } else {
+            NSLayoutConstraint.activate([
+                firstBackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
+                firstBackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+                firstBackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+                firstBackView.heightAnchor.constraint(equalToConstant: 370),
+                
+                totalStarLabel.topAnchor.constraint(equalTo: wineNameLabel.bottomAnchor, constant: 20),
+                totalStarLabel.centerXAnchor.constraint(equalTo: wineNameLabel.centerXAnchor, constant: -100),
+                
+                wineImage.leadingAnchor.constraint(equalTo: firstBackView.leadingAnchor, constant: 30),
+                wineImage.topAnchor.constraint(equalTo: firstBackView.topAnchor, constant: 30),
+                wineImage.trailingAnchor.constraint(equalTo: firstBackView.trailingAnchor, constant: -30),
+                wineImage.heightAnchor.constraint(equalToConstant: 200),
+                
+                labelStackView.topAnchor.constraint(equalTo: wineImage.bottomAnchor, constant: 30),
+                labelStackView.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
+                wineNameLabel.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 10),
+                wineNameLabel.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
+                
+                
+            ])
+        }
+
     }
     
     func setSecondUI() {

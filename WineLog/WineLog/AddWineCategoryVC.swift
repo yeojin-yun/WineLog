@@ -125,7 +125,7 @@ extension AddWineCategoryVC{
         }
         
         NSLayoutConstraint.activate([
-            infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
+            UIScreen.main.bounds.height < 700 ? infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50) : infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
             infoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
