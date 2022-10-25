@@ -362,10 +362,17 @@ extension EditWineInfomationVC{
 //MARK: - UI
 extension EditWineInfomationVC{
     private func setNavigation(){
-        let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 25))
-        logoView.contentMode = .scaleAspectFit
-        logoView.image = UIImage(named: "titleLogo4")
-        navigationItem.titleView = logoView
+        let titleView = UIView()
+        let imageView = UIImageView(image: UIImage(named: "titleLogo4"))
+        imageView.contentMode = .scaleAspectFit
+        titleView.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 100),
+            imageView.heightAnchor.constraint(equalToConstant: 80),
+        ])
+        navigationItem.titleView = imageView
         
         saveItem.title = "저장"
         saveItem.target = self

@@ -82,7 +82,7 @@ extension AddWineCategoryVC{
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
             imageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: 120),
+            imageView.widthAnchor.constraint(equalToConstant: 100),
             imageView.heightAnchor.constraint(equalToConstant: 80),
         ])
         navigationItem.titleView = imageView

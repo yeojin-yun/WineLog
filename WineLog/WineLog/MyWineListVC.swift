@@ -69,7 +69,7 @@ extension MyWineListVC: UICollectionViewDataSource {
             if let priceValue: Int = outputWineList[indexPath.item].price {
                 cell.priceLabel.text = "가격: " + String(priceValue.toDecimalFormat()) + "원"
             } else {
-                cell.priceLabel.text = ""
+                cell.priceLabel.text = "가격: -"
             }
             cell.scoreLabel.text = "별점: \(String(format: "%.1f", Double(outputWineList[indexPath.item].totalStar)))"
             
@@ -149,6 +149,8 @@ extension MyWineListVC: UICollectionViewDelegate {
             }else{
                 let detailWineVC = DetailWineViewController(wineModel: outputWineList[indexPath.item])
                 //            detailWineVC.wineModel = outputWineList[indexPath.item]
+                detailWineVC.delegate = self
+                detailWineVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(detailWineVC, animated: true)
             }
         }
@@ -156,6 +158,7 @@ extension MyWineListVC: UICollectionViewDelegate {
 }
 extension MyWineListVC: WineRemoveDelegate {
     func removeWine() {
+        print(#function)
         Singleton.shared.loadFromJson()
         listCV.reloadData()
     }
@@ -365,7 +368,7 @@ extension MyWineListVC {
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
             imageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: 120),
+            imageView.widthAnchor.constraint(equalToConstant: 100),
             imageView.heightAnchor.constraint(equalToConstant: 80),
         ])
         navigationItem.titleView = imageView

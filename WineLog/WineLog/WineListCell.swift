@@ -84,7 +84,9 @@ extension WineListCell {
             bottomStackView.topAnchor.constraint(equalTo: topStackView.bottomAnchor, constant: 8),
             bottomStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
             bottomStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
-            bottomStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            bottomStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            priceLabel.heightAnchor.constraint(equalToConstant: 14)
             
 //            priceLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
 //            priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 10),
