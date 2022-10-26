@@ -79,6 +79,8 @@ extension DetailWineViewController: EditDelegate {
     }
     
     @objc func didTapDeleteBtn(_ sender: UIBarButtonItem) {
+        let selectedWine = self.singleton.firstIndex(of: self.wineModel) ?? 0
+        print("확인1", selectedWine, "count:", self.singleton.count)
         let attributedString = NSMutableAttributedString(string: wineModel.name)
         let alertFont = UIFont(name: "GowunBatang-Bold", size: 17)
         attributedString.addAttribute(.font, value: alertFont!, range: (wineModel.name as NSString).range(of: "\(wineModel.name)"))
@@ -89,6 +91,7 @@ extension DetailWineViewController: EditDelegate {
         let okAction = UIAlertAction(title: "확인", style: .destructive) { action in
             let selectedWine = self.singleton.firstIndex(of: self.wineModel) ?? 0
             self.singleton.remove(at: selectedWine)
+            print("확인2", self.singleton.count)
             self.saveToJson(self.singleton)
             self.delegate?.removeWine()
             self.navigationController?.popViewController(animated: true)
@@ -138,6 +141,18 @@ extension DetailWineViewController {
     }
     
     private func setNavigationBar() {
+        let titleView = UIView()
+        let imageView = UIImageView(image: UIImage(named: "titleLogo4"))
+        imageView.contentMode = .scaleAspectFit
+        titleView.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 100),
+            imageView.heightAnchor.constraint(equalToConstant: 80),
+        ])
+        navigationItem.titleView = imageView
+        
         let button = UIButton()
         button.widthAnchor.constraint(equalToConstant: 25).isActive = true
         button.heightAnchor.constraint(equalToConstant: 25).isActive = true

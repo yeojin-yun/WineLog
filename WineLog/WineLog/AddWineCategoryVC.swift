@@ -75,10 +75,17 @@ extension AddWineCategoryVC{
         setConstraints()
     }
     private func setNavigation(){
-        let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 25))
-        logoView.contentMode = .scaleAspectFit
-        logoView.image = UIImage(named: "titleLogo4")
-        navigationItem.titleView = logoView
+        let titleView = UIView()
+        let imageView = UIImageView(image: UIImage(named: "titleLogo4"))
+        imageView.contentMode = .scaleAspectFit
+        titleView.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 100),
+            imageView.heightAnchor.constraint(equalToConstant: 80),
+        ])
+        navigationItem.titleView = imageView
                        
         self.navigationController?.navigationBar.tintColor = .myGreen
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -125,7 +132,7 @@ extension AddWineCategoryVC{
         }
         
         NSLayoutConstraint.activate([
-            infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
+            UIScreen.main.bounds.height < 700 ? infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50) : infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
             infoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
