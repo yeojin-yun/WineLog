@@ -8,9 +8,5 @@
 		<string>GowunBatang-Regular.ttf</string>
 		<string>GowunBatang-Bold.ttf</string>
 	</array>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Please allow access to select a photo</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Please allow access to select a photo</string>
 </dict>
 </plist>

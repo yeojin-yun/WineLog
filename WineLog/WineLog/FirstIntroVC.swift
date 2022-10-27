@@ -35,7 +35,7 @@ class FirstIntroVC: UIViewController {
         
         setUI()
         layout()
-        
+        loadCheck()
     }
     
 }
@@ -54,8 +54,21 @@ extension FirstIntroVC{
     @objc func didTapCloseButton(_ sender: UIButton){
         if isChecked{
             UserDefaults.standard.set(true, forKey: "firstIntro")
-        }else { UserDefaults.standard.set(false, forKey: "firstIntro") }
+        }else {
+            UserDefaults.standard.set(false, forKey: "firstIntro")
+        }
         self.dismiss(animated: true)
+    }
+    func loadCheck(){
+        if UserDefaults.standard.bool(forKey: "firstIntro") != nil{
+            isChecked = UserDefaults.standard.bool(forKey: "firstIntro")
+        }
+        
+        if !isChecked{
+            checkBox.setImage(UIImage(systemName: "square"), for: .normal)
+        }else{
+            checkBox.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
+        }
     }
 }
 

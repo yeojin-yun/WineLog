@@ -76,7 +76,10 @@ extension AddWineCategoryVC{
     }
     private func setNavigation(){
         let titleView = UIView()
-        let imageView = UIImageView(image: UIImage(named: "titleLogo4"))
+//        let imageView = UIImageView(image: UIImage(named: "titleLogo4"))
+        let imageView = UIButton()
+        imageView.setImage(UIImage(named: "titleLogo4"), for: .normal)
+        imageView.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         imageView.contentMode = .scaleAspectFit
         titleView.addSubview(imageView)
         NSLayoutConstraint.activate([
@@ -87,13 +90,13 @@ extension AddWineCategoryVC{
         ])
         navigationItem.titleView = imageView
                        
-        self.navigationController?.navigationBar.tintColor = .myGreen
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "info.circle"),
-            style: .plain,
-            target: self,
-            action: #selector(buttonPressed(_:)))
-        navigationItem.rightBarButtonItem?.tintColor = .myGreen
+//        self.navigationController?.navigationBar.tintColor = .myGreen
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(
+//            image: UIImage(systemName: "info.circle"),
+//            style: .plain,
+//            target: self,
+//            action: #selector(buttonPressed(_:)))
+//        navigationItem.rightBarButtonItem?.tintColor = .myGreen
     }
     
     private func setAttributes() {
