@@ -391,8 +391,8 @@ extension EditWineInfomationVC{
         [photoView].forEach{
             $0.image = UIImage(named: "selectPhoto")
             $0.contentMode = .scaleAspectFit
-            $0.clipsToBounds = true
-            $0.layer.cornerRadius = 10
+//            $0.clipsToBounds = true
+//            $0.layer.cornerRadius = 10
         }
         [nameField].forEach{
             if view.frame.height > 700{
