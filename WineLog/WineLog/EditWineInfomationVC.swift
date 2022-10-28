@@ -42,7 +42,7 @@ class EditWineInfomationVC: UIViewController {
     //와인 이름
     let nameField = UITextField()
     // 와인종류
-    let wineTypeLabel = UILabel()
+    let wineTypeLabel = CustomLabel(padding: UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4))
     //제조일
     let madeDateField = UITextField()
     //제조국
@@ -551,7 +551,7 @@ extension EditWineInfomationVC{
 //            contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             firstBackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
-            firstBackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
+            firstBackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             firstBackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
 //            firstBackView.heightAnchor.constraint(equalToConstant: 370),
             firstBackView.heightAnchor.constraint(equalTo:contentView.heightAnchor, multiplier: 0.55),
@@ -587,11 +587,11 @@ extension EditWineInfomationVC{
             
             madeContryField.centerYAnchor.constraint(equalTo: wineTypeLabel.centerYAnchor),
             madeContryField.trailingAnchor.constraint(equalTo: wineTypeLabel.leadingAnchor, constant: -5),
-            madeContryField.leadingAnchor.constraint(equalTo: firstBackView.leadingAnchor, constant: 10),
+//            madeContryField.leadingAnchor.constraint(equalTo: firstBackView.leadingAnchor, constant: 10),
 
             madeDateField.centerYAnchor.constraint(equalTo: wineTypeLabel.centerYAnchor),
             madeDateField.leadingAnchor.constraint(equalTo: wineTypeLabel.trailingAnchor, constant: 5),
-            madeDateField.trailingAnchor.constraint(equalTo: firstBackView.trailingAnchor, constant: -10),
+//            madeDateField.trailingAnchor.constraint(equalTo: firstBackView.trailingAnchor, constant: -10),
             
             nameField.topAnchor.constraint(equalTo: wineTypeLabel.bottomAnchor, constant: 10),
             nameField.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),

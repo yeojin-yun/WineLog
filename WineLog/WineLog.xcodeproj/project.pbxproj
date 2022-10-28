@@ -11,7 +11,6 @@
 		B635B95528EE1D7100622056 /* ETInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B635B95428EE1D7100622056 /* ETInt.swift */; };
 		B654561128F0B49F00961619 /* UIColor_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654561028F0B49F00961619 /* UIColor_Extension.swift */; };
 		B654561528F0BAE500961619 /* DetailWineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654561428F0BAE500961619 /* DetailWineViewController.swift */; };
-		B654561728F0BAF700961619 /* DetailWineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654561628F0BAF700961619 /* DetailWineView.swift */; };
 		B654561928F0BB0400961619 /* DetailWineInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654561828F0BB0400961619 /* DetailWineInfoView.swift */; };
 		B654561B28F0BB0F00961619 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654561A28F0BB0F00961619 /* CustomView.swift */; };
 		B654561D28F0BB2100961619 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654561C28F0BB2100961619 /* CustomLabel.swift */; };
@@ -39,7 +38,6 @@
 		B635B95428EE1D7100622056 /* ETInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETInt.swift; sourceTree = "<group>"; };
 		B654561028F0B49F00961619 /* UIColor_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor_Extension.swift; sourceTree = "<group>"; };
 		B654561428F0BAE500961619 /* DetailWineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWineViewController.swift; sourceTree = "<group>"; };
-		B654561628F0BAF700961619 /* DetailWineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWineView.swift; sourceTree = "<group>"; };
 		B654561828F0BB0400961619 /* DetailWineInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWineInfoView.swift; sourceTree = "<group>"; };
 		B654561A28F0BB0F00961619 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		B654561C28F0BB2100961619 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
@@ -97,7 +95,6 @@
 		B654561328F0B54400961619 /* DetailWineView */ = {
 			isa = PBXGroup;
 			children = (
-				B654562D28F15D3D00961619 /* Unused */,
 				B654561428F0BAE500961619 /* DetailWineViewController.swift */,
 				B654561828F0BB0400961619 /* DetailWineInfoView.swift */,
 				B654561A28F0BB0F00961619 /* CustomView.swift */,
@@ -131,14 +128,6 @@
 				B654562A28F15AA300961619 /* EditWineInfomationVC.swift */,
 			);
 			name = Edit;
-			sourceTree = "<group>";
-		};
-		B654562D28F15D3D00961619 /* Unused */ = {
-			isa = PBXGroup;
-			children = (
-				B654561628F0BAF700961619 /* DetailWineView.swift */,
-			);
-			name = Unused;
 			sourceTree = "<group>";
 		};
 		B6857C3E28F45B0200696101 /* Unused */ = {
@@ -299,7 +288,6 @@
 				B67E7BF42906C68A009EEFBE /* CustomTapGesture.swift in Sources */,
 				B654561528F0BAE500961619 /* DetailWineViewController.swift in Sources */,
 				B6DB776128ECA6EE00777CB8 /* AddWineInformationVC.swift in Sources */,
-				B654561728F0BAF700961619 /* DetailWineView.swift in Sources */,
 				B654562B28F15AA300961619 /* EditWineInfomationVC.swift in Sources */,
 				B635B94F28EDB3DD00622056 /* WineModel.swift in Sources */,
 				B6C1694428EAC20300BE77F8 /* AppDelegate.swift in Sources */,

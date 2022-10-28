@@ -56,9 +56,9 @@ class DetailWineInfoView: UIView {
         
         wineImage.image = UIImage(named: "wine_example")
         wineImage.contentMode = .scaleAspectFit
-        wineImage.layer.cornerRadius = 10
+//        wineImage.clipsToBounds = true
+        wineImage.layer.cornerRadius = 20
         wineImage.layer.masksToBounds = true
-        wineImage.clipsToBounds = true
         
         [wineNameLabel].forEach {
             $0.text = "KIMCROWFORD"
@@ -144,6 +144,7 @@ class DetailWineInfoView: UIView {
             
             UIScreen.main.bounds.height < 700 ? labelStackView.topAnchor.constraint(equalTo: wineImage.bottomAnchor, constant: 15) : labelStackView.topAnchor.constraint(equalTo: wineImage.bottomAnchor, constant: 30),
             labelStackView.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
+            wineTypeLabel.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
             wineNameLabel.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 10),
             wineNameLabel.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),          
         ])

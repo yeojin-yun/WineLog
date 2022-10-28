@@ -27,7 +27,7 @@ class FirstIntroVC: UIViewController {
     내가 원하는 카테고리만 고를 수 있고 언제든지
     삭제도 할 수있어요.
 
-    자신만의 와인로그를 만들어보세요
+    자신만의 와인로그를 만들어보세요.
     """
 
     override func viewDidLoad() {
@@ -110,7 +110,7 @@ extension FirstIntroVC{
             $0.tintColor = .black
         }
         checkBox.setImage(UIImage(systemName: "square"), for: .normal)
-        checkBox.setTitle("다시 보지 않기", for: .normal)
+        checkBox.setTitle(" 다시 보지 않기", for: .normal)
         checkBox.addTarget(self, action: #selector(didTapNeverButton(_:)), for: .touchUpInside)
         closeButton.setTitle("닫기", for: .normal)
         closeButton.addTarget(self, action: #selector(didTapCloseButton(_:)), for: .touchUpInside)
@@ -132,12 +132,13 @@ extension FirstIntroVC{
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40),
+            contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 00),
             contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             contentView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
-            contentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.65),
+//            contentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.65),
+            contentView.bottomAnchor.constraint(equalTo: checkBox.bottomAnchor, constant: 20),
             
-            firstLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            firstLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 50),
             firstLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             firstLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -20),
             firstLabel.heightAnchor.constraint(equalToConstant: 30),
@@ -146,19 +147,19 @@ extension FirstIntroVC{
             secondLabel.topAnchor.constraint(equalTo: firstLabel.bottomAnchor, constant: 10),
             secondLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            teamImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+//            teamImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             teamImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             teamImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.95),
             teamImageView.heightAnchor.constraint(equalTo: teamImageView.widthAnchor, multiplier: (320/1970)),
-            teamImageView.topAnchor.constraint(greaterThanOrEqualTo: secondLabel.bottomAnchor, constant: 0),
+            teamImageView.topAnchor.constraint(greaterThanOrEqualTo: secondLabel.bottomAnchor, constant: 60),
             
-            closeButton.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 5),
-            closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            closeButton.topAnchor.constraint(equalTo: teamImageView.bottomAnchor, constant: 15),
+            closeButton.trailingAnchor.constraint(equalTo: teamImageView.trailingAnchor),
             closeButton.widthAnchor.constraint(equalToConstant: 40),
             
             checkBox.topAnchor.constraint(equalTo: closeButton.topAnchor),
             checkBox.bottomAnchor.constraint(equalTo: closeButton.bottomAnchor),
-            checkBox.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -15),
+            checkBox.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -10),
             checkBox.widthAnchor.constraint(equalToConstant: 110),
             
         ])

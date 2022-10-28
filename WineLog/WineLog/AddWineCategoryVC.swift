@@ -52,7 +52,9 @@ extension AddWineCategoryVC{
     
     @objc func buttonPressed(_ sender: UIBarButtonItem){
 //        present(IntroduceVC(), animated: true)
-        present(FirstIntroVC(), animated: true)
+        let firstVC = FirstIntroVC()
+        firstVC.modalPresentationStyle = .fullScreen
+        present(firstVC, animated: true)
     }
     
     func openIntro(){
@@ -61,7 +63,9 @@ extension AddWineCategoryVC{
             isOpen = UserDefaults.standard.bool(forKey: "firstIntro")
         }
         if !isOpen{
-            present(FirstIntroVC(), animated: true)
+            let firstVC = FirstIntroVC()
+            firstVC.modalPresentationStyle = .fullScreen
+            present(firstVC, animated: true)
         }
     }
 }
@@ -78,6 +82,7 @@ extension AddWineCategoryVC{
         let titleView = UIView()
 //        let imageView = UIImageView(image: UIImage(named: "titleLogo4"))
         let imageView = UIButton()
+        imageView.adjustsImageWhenHighlighted = false //클릭 시 버튼 깜빡임 없애기
         imageView.setImage(UIImage(named: "titleLogo4"), for: .normal)
         imageView.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         imageView.contentMode = .scaleAspectFit
