@@ -8,6 +8,8 @@
 import UIKit
 
 class FirstIntroVC: UIViewController {
+    var contentHeight: NSLayoutConstraint!
+    
     let contentView = UIView()
     let firstLabel = UILabel()
     let secondLabel = UILabel()
@@ -34,6 +36,7 @@ class FirstIntroVC: UIViewController {
         super.viewDidLoad()
         
         setUI()
+        layoutGuard()
         layout()
         loadCheck()
     }
@@ -85,7 +88,6 @@ extension FirstIntroVC{
         }
         
         [secondLabel].forEach{
-            $0.font = UIFont(name: "PoorStory-Regular", size: 16)
             $0.numberOfLines = 0
             $0.text = descContent
             $0.sizeToFit()
@@ -116,6 +118,21 @@ extension FirstIntroVC{
         closeButton.addTarget(self, action: #selector(didTapCloseButton(_:)), for: .touchUpInside)
     }
     
+    private func layoutGuard(){
+//        print(view.frame.height)
+        if view.frame.height < 700{
+            contentHeight = contentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.65)
+        }else{
+            contentHeight = contentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55)
+        }
+//        print(view.frame.width)
+        if view.frame.width < 330{
+            secondLabel.font = UIFont(name: "PoorStory-Regular", size: 14)
+        }else{
+            secondLabel.font = UIFont(name: "PoorStory-Regular", size: 16)
+        }
+    }
+    
     private func layout(){
         view.addSubview(contentView)
         contentView.addSubview(firstLabel)
@@ -132,29 +149,29 @@ extension FirstIntroVC{
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 00),
+            contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -10),
             contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            contentView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
-//            contentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.65),
-            contentView.bottomAnchor.constraint(equalTo: checkBox.bottomAnchor, constant: 20),
+            contentView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            contentHeight,
+//            contentView.bottomAnchor.constraint(equalTo: checkBox.bottomAnchor, constant: 20),
             
-            firstLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 50),
-            firstLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            firstLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -20),
+            firstLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            firstLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            firstLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -15),
             firstLabel.heightAnchor.constraint(equalToConstant: 30),
             
-            secondLabel.leadingAnchor.constraint(equalTo: firstLabel.leadingAnchor),
             secondLabel.topAnchor.constraint(equalTo: firstLabel.bottomAnchor, constant: 10),
-            secondLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            secondLabel.leadingAnchor.constraint(equalTo: firstLabel.leadingAnchor),
+            secondLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
             
-//            teamImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            teamImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             teamImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             teamImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.95),
             teamImageView.heightAnchor.constraint(equalTo: teamImageView.widthAnchor, multiplier: (320/1970)),
-            teamImageView.topAnchor.constraint(greaterThanOrEqualTo: secondLabel.bottomAnchor, constant: 60),
+            teamImageView.topAnchor.constraint(greaterThanOrEqualTo: secondLabel.bottomAnchor, constant: 0),
             
-            closeButton.topAnchor.constraint(equalTo: teamImageView.bottomAnchor, constant: 15),
-            closeButton.trailingAnchor.constraint(equalTo: teamImageView.trailingAnchor),
+            closeButton.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8),
+            closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             closeButton.widthAnchor.constraint(equalToConstant: 40),
             
             checkBox.topAnchor.constraint(equalTo: closeButton.topAnchor),

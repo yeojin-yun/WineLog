@@ -53,7 +53,7 @@ extension AddWineCategoryVC{
     @objc func buttonPressed(_ sender: UIBarButtonItem){
 //        present(IntroduceVC(), animated: true)
         let firstVC = FirstIntroVC()
-        firstVC.modalPresentationStyle = .fullScreen
+        firstVC.modalPresentationStyle = .overFullScreen
         present(firstVC, animated: true)
     }
     
@@ -64,7 +64,7 @@ extension AddWineCategoryVC{
         }
         if !isOpen{
             let firstVC = FirstIntroVC()
-            firstVC.modalPresentationStyle = .fullScreen
+            firstVC.modalPresentationStyle = .overFullScreen
             present(firstVC, animated: true)
         }
     }
@@ -79,29 +79,16 @@ extension AddWineCategoryVC{
         setConstraints()
     }
     private func setNavigation(){
-        let titleView = UIView()
-//        let imageView = UIImageView(image: UIImage(named: "titleLogo4"))
-        let imageView = UIButton()
-        imageView.adjustsImageWhenHighlighted = false //클릭 시 버튼 깜빡임 없애기
-        imageView.setImage(UIImage(named: "titleLogo4"), for: .normal)
-        imageView.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-        imageView.contentMode = .scaleAspectFit
-        titleView.addSubview(imageView)
+        let logoButton = UIButton()
+        logoButton.adjustsImageWhenHighlighted = false //클릭 시 버튼 깜빡임 없애기
+        logoButton.setImage(UIImage(named: "titleLogo4"), for: .normal)
+        logoButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
+        logoButton.contentMode = .scaleAspectFit
         NSLayoutConstraint.activate([
-            imageView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: 100),
-            imageView.heightAnchor.constraint(equalToConstant: 80),
+            logoButton.widthAnchor.constraint(equalToConstant: 100),
+            logoButton.heightAnchor.constraint(equalToConstant: 35), //80
         ])
-        navigationItem.titleView = imageView
-                       
-//        self.navigationController?.navigationBar.tintColor = .myGreen
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(
-//            image: UIImage(systemName: "info.circle"),
-//            style: .plain,
-//            target: self,
-//            action: #selector(buttonPressed(_:)))
-//        navigationItem.rightBarButtonItem?.tintColor = .myGreen
+        navigationItem.titleView = logoButton
     }
     
     private func setAttributes() {

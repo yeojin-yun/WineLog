@@ -31,8 +31,6 @@ class EditWineInfomationVC: UIViewController {
     let imagePicker = UIImagePickerController()
     lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapGesture))
     
-    let saveItem = UIBarButtonItem()
-    
     let contentView = UIView()
     let firstBackView = UIView()
     let secondBackView = UIView()
@@ -374,9 +372,8 @@ extension EditWineInfomationVC{
         ])
         navigationItem.titleView = imageView
         
-        saveItem.title = "저장"
-        saveItem.target = self
-        saveItem.action = #selector(didTapSaveBtn(_:))
+        let saveItem = UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(didTapSaveBtn(_:)))
+        saveItem.tintColor = .myGreen
         navigationItem.rightBarButtonItem = saveItem
     }
     
@@ -436,9 +433,10 @@ extension EditWineInfomationVC{
         [madeDateField].forEach{
             $0.font = .systemFont(ofSize: 14)
             $0.textColor = .gray
-            $0.placeholder = "제조일"
+            $0.placeholder = "제조년도"
             $0.textAlignment = .left
             $0.delegate = self
+            $0.keyboardType = .numberPad
         }
         [totalSlider].forEach{
             $0.maximumValue = 5.0
@@ -586,12 +584,13 @@ extension EditWineInfomationVC{
             wineTypeLabel.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
             
             madeContryField.centerYAnchor.constraint(equalTo: wineTypeLabel.centerYAnchor),
-            madeContryField.trailingAnchor.constraint(equalTo: wineTypeLabel.leadingAnchor, constant: -5),
+            madeContryField.trailingAnchor.constraint(equalTo: wineTypeLabel.leadingAnchor, constant: -10),
 //            madeContryField.leadingAnchor.constraint(equalTo: firstBackView.leadingAnchor, constant: 10),
 
             madeDateField.centerYAnchor.constraint(equalTo: wineTypeLabel.centerYAnchor),
-            madeDateField.leadingAnchor.constraint(equalTo: wineTypeLabel.trailingAnchor, constant: 5),
+            madeDateField.leadingAnchor.constraint(equalTo: wineTypeLabel.trailingAnchor, constant: 10),
 //            madeDateField.trailingAnchor.constraint(equalTo: firstBackView.trailingAnchor, constant: -10),
+            madeDateField.widthAnchor.constraint(equalToConstant: 60),
             
             nameField.topAnchor.constraint(equalTo: wineTypeLabel.bottomAnchor, constant: 10),
             nameField.centerXAnchor.constraint(equalTo: firstBackView.centerXAnchor),
@@ -715,6 +714,13 @@ extension EditWineInfomationVC: UITextFieldDelegate{
                 }
             }
             return true
+        }else if textField == madeDateField{
+            guard let text = textField.text else{return true}
+            if string == ""{
+                return true
+            }else{
+                return text.count > 3 ? false : true
+            }
         }else{return true}
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
