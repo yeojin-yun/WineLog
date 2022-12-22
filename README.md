@@ -23,6 +23,4 @@
 ## Architecture
 - MVC
 
-![IMG_0334](https://user-images.githubusercontent.com/85544383/209137805-9e63d1b4-3e44-4564-8a7c-0a82edf72e73.PNG)![IMG_0335](https://user-images.githubusercontent.com/85544383/209138431-b66614af-4aec-4a90-877e-d5d222f3bceb.PNG)
-![IMG_0336](https://user-images.githubusercontent.com/85544383/209138492-a5a77bf8-8c3e-42df-8ad4-96ccd0efde10.PNG)![IMG_0337](https://user-images.githubusercontent.com/85544383/209138533-405a75de-9be4-4600-895c-d86489d3b365.PNG)
-
+![WineLog](https://user-images.githubusercontent.com/85544383/209138987-6f89ff79-ef92-443d-936d-c8df99796a52.png)
