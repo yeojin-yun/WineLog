@@ -23,4 +23,4 @@
 ## Architecture
 - MVC
 
-![WineLog](https://user-images.githubusercontent.com/85544383/209138987-6f89ff79-ef92-443d-936d-c8df99796a52.png)
+![WineLog](https://user-images.githubusercontent.com/85544383/209139471-9fe50ec3-6a0b-4dce-b3e6-4385008e62c5.png)
