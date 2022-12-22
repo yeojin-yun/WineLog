@@ -18,9 +18,12 @@
 ## MVP
 - 와인 추가
 - 와인 정보 입력
-- 와인 리스트
+- 와인 리스트 
+- 와인 상세 정보 수정 및 삭제
 
 ## Architecture
 - MVC
+
+---
 
 ![WineLog](https://user-images.githubusercontent.com/85544383/209139471-9fe50ec3-6a0b-4dce-b3e6-4385008e62c5.png)
