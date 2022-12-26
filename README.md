@@ -28,4 +28,3 @@
 
 ![WineLog](https://user-images.githubusercontent.com/85544383/209139471-9fe50ec3-6a0b-4dce-b3e6-4385008e62c5.png)
 
-https://user-images.githubusercontent.com/85544383/209143645-a59390b1-e76a-4586-be5c-d90dba553017.MP4 ![삭제](https://user-images.githubusercontent.com/85544383/209143756-a68a6ed5-0683-4e98-a0cc-d3bd2f140cb7.gif)
